@@ -1,0 +1,6 @@
+name: SGameBase
+version: "1.0.0"
+api: ["1.0.0"]
+author: "hhm"
+description: "SGame基础模块"
+main: cn.hhm.mc.game.base.SGameBase

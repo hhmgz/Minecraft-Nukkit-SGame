@@ -9,7 +9,6 @@ import java.io.File
  * version 1.0
  */
 abstract class AbstractModule(val file: File) {
-
     open fun onLoad() {
 
     }

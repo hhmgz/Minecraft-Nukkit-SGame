@@ -1,5 +1,6 @@
 package cn.hhm.mc.game.base
 
+import cn.hhm.mc.game.base.utils.NukkitBugFixer
 import cn.nukkit.plugin.PluginBase
 import net.mcpes.hhm.kernel.PluginKernel
 
@@ -13,6 +14,7 @@ class SGameBase : PluginBase() {
     lateinit var kernel: PluginKernel
 
     override fun onLoad() {
+        NukkitBugFixer.fix()
         kernel = PluginKernel(this.file)
         kernel.onLoad()
     }
