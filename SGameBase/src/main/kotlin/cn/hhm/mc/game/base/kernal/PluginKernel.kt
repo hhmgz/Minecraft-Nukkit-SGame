@@ -1,4 +1,4 @@
-package net.mcpes.hhm.kernel
+package cn.hhm.mc.game.base.kernal
 
 import cn.hhm.mc.game.base.kernal.classload.KernelClassLoader
 import cn.hhm.mc.game.base.kernal.utils.BaseUtils

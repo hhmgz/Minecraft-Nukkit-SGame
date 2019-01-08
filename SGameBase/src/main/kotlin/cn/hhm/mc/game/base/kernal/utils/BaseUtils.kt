@@ -6,7 +6,7 @@ import cn.nukkit.plugin.PluginBase
 import cn.nukkit.plugin.PluginClassLoader
 import cn.nukkit.utils.ServerException
 import net.mcpes.hhm.kernel.EncryptedPluginClassLoader
-import net.mcpes.hhm.kernel.PluginKernel
+import cn.hhm.mc.game.base.kernal.PluginKernel
 import org.apache.http.client.ClientProtocolException
 import org.apache.http.client.config.RequestConfig
 import org.apache.http.client.methods.CloseableHttpResponse

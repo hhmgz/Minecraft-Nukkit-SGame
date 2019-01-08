@@ -9,6 +9,8 @@ import java.io.File
  * version 1.0
  */
 abstract class AbstractModule(val file: File) {
+    val absolutePath = file.absolutePath
+
     open fun onLoad() {
 
     }
