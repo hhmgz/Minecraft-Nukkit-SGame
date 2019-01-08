@@ -16,6 +16,7 @@ import cn.nukkit.network.protocol.ModalFormRequestPacket
 
 class NukkitPlayer(interfaz: SourceInterface, clientID: Long?, ip: String, port: Int) : Player(interfaz, clientID, ip, port) {
     val guiParams: HashMap<String, Array<out Any>> = hashMapOf()
+    var gameInfo: Array<Any> = arrayOf()
 
     fun getFormWindowCount() = this.formWindowCount
 
