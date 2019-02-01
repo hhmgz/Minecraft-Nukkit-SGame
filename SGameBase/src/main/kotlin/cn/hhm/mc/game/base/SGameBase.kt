@@ -1,12 +1,12 @@
 package cn.hhm.mc.game.base
 
 import cn.hhm.mc.game.base.gui.listener.GUIListener
+import cn.hhm.mc.game.base.kernel.PluginKernel
 import cn.hhm.mc.game.base.listener.NormalListener
+import cn.hhm.mc.game.base.module.GameBase
 import cn.hhm.mc.game.base.utils.Games
 import cn.hhm.mc.game.base.utils.NukkitBugFixer
 import cn.nukkit.plugin.PluginBase
-import cn.hhm.mc.game.base.kernal.PluginKernel
-import cn.hhm.mc.game.base.module.GameBase
 
 /**
  * SGame
@@ -26,15 +26,11 @@ class SGameBase : PluginBase() {
     override fun onEnable() {
         this.registerListeners()
         kernel.onEnable()
-        this.loadGames()
         info("启动成功")
     }
 
     override fun onDisable() {
         kernel.onDisable()
-    }
-
-    private fun loadGames(){
     }
 
     private fun registerListeners(){

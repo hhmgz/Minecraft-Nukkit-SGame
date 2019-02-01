@@ -1,4 +1,4 @@
-package cn.hhm.mc.game.base.kernal.classload
+package cn.hhm.mc.game.base.kernel.classload
 
 import net.mcpes.hhm.kernel.EncryptedPluginClassLoader
 import java.io.ByteArrayOutputStream

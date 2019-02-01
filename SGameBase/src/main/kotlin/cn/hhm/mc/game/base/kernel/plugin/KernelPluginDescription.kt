@@ -1,4 +1,4 @@
-package cn.hhm.mc.game.base.kernal.plugin
+package cn.hhm.mc.game.base.kernel.plugin
 
 import cn.nukkit.plugin.PluginDescription
 

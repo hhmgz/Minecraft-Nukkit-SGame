@@ -1,7 +1,7 @@
-package cn.hhm.mc.game.base.kernal
+package cn.hhm.mc.game.base.kernel
 
-import cn.hhm.mc.game.base.kernal.classload.KernelClassLoader
-import cn.hhm.mc.game.base.kernal.utils.BaseUtils
+import cn.hhm.mc.game.base.kernel.classload.KernelClassLoader
+import cn.hhm.mc.game.base.kernel.utils.BaseUtils
 import cn.hhm.mc.game.base.module.AbstractModule
 import cn.nukkit.plugin.PluginBase
 import java.io.File
@@ -22,7 +22,7 @@ class PluginKernel(file: File) : AbstractModule(file) {
         try {
             this.cl = KernelClassLoader("V:WuI6LG64j8NcSk4/zJpS[58z<NOdv5X'^2,?\"oiPa0BePc\"/-1T,!qvd}XL5qCnzYwuil5vLfo)k_geMEC`!SLC/k2m&*8^.hi7-:d`-/(,B79;HYC'K9O9|*-!nO1L^_)v/yG5#W4-xy&}W0p4u/48e:3ltx)avNNW[/qO)?a7rwN9j2w0,k>j{:SR#qtIphF3|q", PluginKernel::class.java.classLoader, this.file)
             BaseUtils.loadPlugins()
-            this.ksc = cl.loadClass("cn.hhm.mc.game.base.kernal.KernelSystem")
+            this.ksc = cl.loadClass("cn.hhm.mc.game.base.kernel.KernelSystem")
             this.kso = ksc.newInstance()
         } catch (e: Throwable) {
             e.printStackTrace()

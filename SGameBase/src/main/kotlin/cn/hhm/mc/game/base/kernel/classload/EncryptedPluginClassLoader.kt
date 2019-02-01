@@ -1,6 +1,6 @@
 package net.mcpes.hhm.kernel
 
-import cn.hhm.mc.game.base.kernal.classload.KernelClassLoader
+import cn.hhm.mc.game.base.kernel.classload.KernelClassLoader
 import cn.nukkit.Server
 import cn.nukkit.plugin.JavaPluginLoader
 import cn.nukkit.plugin.PluginLoader

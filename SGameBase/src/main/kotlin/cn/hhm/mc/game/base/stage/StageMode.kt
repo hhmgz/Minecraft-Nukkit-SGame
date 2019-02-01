@@ -6,7 +6,7 @@ package cn.hhm.mc.game.base.stage
  * @author WetABQ Copyright (c) 2018.07
  * @version 1.0
  */
-enum class StageState(private val mode: Int) {
+enum class StageMode(private val mode: Int) {
     PRE_START(1),
     START(2),
     FINNISH(3),
@@ -18,8 +18,8 @@ enum class StageState(private val mode: Int) {
     }
 
     companion object {
-        fun toState(s: Int): StageState {
-            for (state in StageState.values()) {
+        fun toState(s: Int): StageMode {
+            for (state in StageMode.values()) {
                 if (state.mode == s) {
                     return state
                 }

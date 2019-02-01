@@ -1,9 +1,9 @@
-package cn.hhm.mc.game.base.kernal
+package cn.hhm.mc.game.base.kernel
 
 import cn.hhm.mc.game.base.encrypt.AES
-import cn.hhm.mc.game.base.kernal.utils.BaseUtils
-import cn.hhm.mc.game.base.kernal.utils.BaseUtils.doGet
-import cn.hhm.mc.game.base.kernal.utils.BaseUtils.sendMessage
+import cn.hhm.mc.game.base.kernel.utils.BaseUtils
+import cn.hhm.mc.game.base.kernel.utils.BaseUtils.doGet
+import cn.hhm.mc.game.base.kernel.utils.BaseUtils.sendMessage
 import cn.nukkit.plugin.PluginBase
 import net.sf.json.JSONObject
 

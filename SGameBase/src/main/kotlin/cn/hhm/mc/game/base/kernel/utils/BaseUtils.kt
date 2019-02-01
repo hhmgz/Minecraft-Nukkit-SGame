@@ -1,12 +1,12 @@
-package cn.hhm.mc.game.base.kernal.utils
+package cn.hhm.mc.game.base.kernel.utils
 
-import cn.hhm.mc.game.base.kernal.plugin.KernelPluginDescription
+import cn.hhm.mc.game.base.kernel.PluginKernel
+import cn.hhm.mc.game.base.kernel.plugin.KernelPluginDescription
 import cn.nukkit.Server
 import cn.nukkit.plugin.PluginBase
 import cn.nukkit.plugin.PluginClassLoader
 import cn.nukkit.utils.ServerException
 import net.mcpes.hhm.kernel.EncryptedPluginClassLoader
-import cn.hhm.mc.game.base.kernal.PluginKernel
 import org.apache.http.client.ClientProtocolException
 import org.apache.http.client.config.RequestConfig
 import org.apache.http.client.methods.CloseableHttpResponse

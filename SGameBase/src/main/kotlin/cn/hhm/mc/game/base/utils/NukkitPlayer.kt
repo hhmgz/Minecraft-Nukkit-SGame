@@ -14,7 +14,7 @@ import cn.nukkit.network.protocol.ModalFormRequestPacket
  * version 1.0
  */
 
-class NukkitPlayer(interfaz: SourceInterface, clientID: Long?, ip: String, port: Int) : Player(interfaz, clientID, ip, port) {
+class NukkitPlayer(`interface`: SourceInterface, clientID: Long?, ip: String, port: Int) : Player(`interface`, clientID, ip, port) {
     val guiParams: HashMap<String, Array<out Any>> = hashMapOf()
     var gameInfo: Array<Any> = arrayOf()
 
