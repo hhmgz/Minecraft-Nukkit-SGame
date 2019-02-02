@@ -11,3 +11,7 @@ fun Array<out BroadcastRange>.isOverlap(): Boolean {
     }
     return false
 }
+
+fun Array<out BroadcastRange>.isNeedTransmit(): Boolean {
+    return this.contains(BroadcastRange.ALIVE) || this.contains(BroadcastRange.DEATHWATCH)
+}
