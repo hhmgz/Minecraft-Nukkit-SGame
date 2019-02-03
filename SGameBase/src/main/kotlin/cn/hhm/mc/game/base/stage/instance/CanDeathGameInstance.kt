@@ -9,14 +9,14 @@ abstract class CanDeathGameInstance(room: GameRoom) : GameInstance(room) {
     val alivePlayers: HashSet<String> = hashSetOf()
     val deathPlayers: HashSet<String> = hashSetOf()
 
-    fun broadcast0(type: BroadcastType, msg: String, range: Array<out BroadcastRange>, sent: HashSet<String>?, overlap: Boolean) {
-        sent ?: return
+    fun broadcast0(type: BroadcastType, msg: String, except: Array<String>, range: Array<out BroadcastRange>, sent: HashSet<String>?, overlap: Boolean) {
+        if (overlap) sent ?: return
         if (range.contains(BroadcastRange.ALIVE)) {
-            alivePlayers.forEach { s ->
+            alivePlayers.filter { !except.contains(it) }.forEach { s ->
                 when (type) {
                     BroadcastType.MESSAGE -> {
                         if (overlap) {
-                            if (!sent.contains(s)) {
+                            if (!sent!!.contains(s)) {
                                 allPlayers[s]?.sendMessage(msg)
                                 sent.add(s)
                             }
@@ -26,7 +26,7 @@ abstract class CanDeathGameInstance(room: GameRoom) : GameInstance(room) {
                     }
                     BroadcastType.TIP -> {
                         if (overlap) {
-                            if (!sent.contains(s)) {
+                            if (!sent!!.contains(s)) {
                                 allPlayers[s]?.sendTip(msg)
                                 sent.add(s)
                             }
@@ -36,7 +36,7 @@ abstract class CanDeathGameInstance(room: GameRoom) : GameInstance(room) {
                     }
                     BroadcastType.POP -> {
                         if (overlap) {
-                            if (!sent.contains(s)) {
+                            if (!sent!!.contains(s)) {
                                 allPlayers[s]?.sendPopup(msg)
                                 sent.add(s)
                             }
@@ -48,11 +48,11 @@ abstract class CanDeathGameInstance(room: GameRoom) : GameInstance(room) {
             }
         }
         if (range.contains(BroadcastRange.DEATHWATCH)) {
-            deathPlayers.forEach { s ->
+            deathPlayers.filter { !except.contains(it) }.forEach { s ->
                 when (type) {
                     BroadcastType.MESSAGE -> {
                         if (overlap) {
-                            if (!sent.contains(s)) {
+                            if (!sent!!.contains(s)) {
                                 allPlayers[s]?.sendMessage(msg)
                                 sent.add(s)
                             }
@@ -62,7 +62,7 @@ abstract class CanDeathGameInstance(room: GameRoom) : GameInstance(room) {
                     }
                     BroadcastType.TIP -> {
                         if (overlap) {
-                            if (!sent.contains(s)) {
+                            if (!sent!!.contains(s)) {
                                 allPlayers[s]?.sendTip(msg)
                                 sent.add(s)
                             }
@@ -72,7 +72,7 @@ abstract class CanDeathGameInstance(room: GameRoom) : GameInstance(room) {
                     }
                     BroadcastType.POP -> {
                         if (overlap) {
-                            if (!sent.contains(s)) {
+                            if (!sent!!.contains(s)) {
                                 allPlayers[s]?.sendPopup(msg)
                                 sent.add(s)
                             }
@@ -85,7 +85,31 @@ abstract class CanDeathGameInstance(room: GameRoom) : GameInstance(room) {
         }
     }
 
-    fun sendTitle0(msg: String, subMessage: String = "", fadeIn: Int = 10, stay: Int = 30, fadeOut: Int = 10, range: Array<out BroadcastRange>, sent: HashSet<String>?, overlap: Boolean) {
-
+    fun sendTitle0(msg: String, subMessage: String = "", fadeIn: Int = 10, stay: Int = 30, fadeOut: Int = 10, except: Array<String>, range: Array<out BroadcastRange>, sent: HashSet<String>?, overlap: Boolean) {
+        if (overlap) sent ?: return
+        if (range.contains(BroadcastRange.ALIVE)) {
+            alivePlayers.filter { !except.contains(it) }.forEach { s ->
+                if (overlap) {
+                    if (!sent!!.contains(s)) {
+                        allPlayers[s]?.sendTitle(msg, subMessage, fadeIn, stay, fadeOut)
+                        sent.add(s)
+                    }
+                } else {
+                    allPlayers[s]?.sendTip(msg)
+                }
+            }
+        }
+        if (range.contains(BroadcastRange.DEATHWATCH)) {
+            deathPlayers.filter { !except.contains(it) }.forEach { s ->
+                if (overlap) {
+                    if (!sent!!.contains(s)) {
+                        allPlayers[s]?.sendTitle(msg, subMessage, fadeIn, stay, fadeOut)
+                        sent.add(s)
+                    }
+                } else {
+                    allPlayers[s]?.sendTip(msg)
+                }
+            }
+        }
     }
 }

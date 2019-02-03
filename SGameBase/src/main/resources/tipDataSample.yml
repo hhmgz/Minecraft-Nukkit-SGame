@@ -1,0 +1,13 @@
+#GameTipData示例配置文件
+game.join.toEntrant: "%GAME_MAIN_TITLE成功加入游戏房间:%1" #加入游戏对加入者消息
+game.join.toOthers: "§7<§b%1§7> §6加入了房间! (%2/%3)" #加入游戏对其他人消息
+game.join.error: "%GAME_MAIN_TITLE%1实例错误,请稍后再试"
+game.join.reachedMaximum: "%GAME_MAIN_TITLE%1实例加入失败,人数达到最大值,请重新再试"
+
+game.quit:
+
+game.wait.countDown.final: "%GAME_MAIN_TITLE§l§%1%1" #倒计时<10s
+game.wait.countDown.beginning: "%GAME_MAIN_TITLE§l§6距离游戏开始还有%1秒" #倒计时>10s
+
+game.start.go: "%GAME_MAIN_TITLE§l§2游戏开始!" #游戏开始提醒
+

@@ -1,5 +1,6 @@
 package cn.hhm.mc.game.base.stage
 
+import cn.hhm.mc.game.base.data.GameTipData
 import cn.hhm.mc.game.base.stage.instance.CanDeathGameInstance
 import cn.hhm.mc.game.base.utils.*
 
@@ -29,89 +30,84 @@ abstract class GameInstance(val room: GameRoom) {
 
     }
 
-    open fun broadcast(type: BroadcastType, msg: String, vararg range: BroadcastRange = arrayOf(BroadcastRange.ALL)) {
+    infix fun String.gTranslate(params: Array<out Any>) = GameTipData.tipData[room.type]!!.translate(this, params)
+
+    open fun broadcast(type: BroadcastType, msg: String, except: Array<String>, vararg range: BroadcastRange = arrayOf(BroadcastRange.ALL)) {
         val flag = this is CanDeathGameInstance && range.isNeedTransmit()
         if (!range.isOverlap()) {
             range.forEach { r ->
                 when (type) {
                     BroadcastType.MESSAGE -> {
                         when (r) {
-                            BroadcastRange.ALL -> allPlayers.forEach { _, p -> p.sendMessage(msg) }
-                            BroadcastRange.PLAYING -> playingPlayers.forEach { s -> allPlayers[s]?.sendMessage(msg) }
-                            BroadcastRange.WATCH -> watchers.forEach { s -> allPlayers[s]?.sendMessage(msg) }
+                            BroadcastRange.ALL -> allPlayers.filter { !except.contains(it.key) }.forEach { _, p -> p.sendMessage(msg) }
+                            BroadcastRange.PLAYING -> playingPlayers.filter { !except.contains(it) }.forEach { s -> allPlayers[s]?.sendMessage(msg) }
+                            BroadcastRange.WATCH -> watchers.filter { !except.contains(it) }.forEach { s -> allPlayers[s]?.sendMessage(msg) }
                             else -> {
                             }
                         }
                     }
                     BroadcastType.TIP -> {
                         when (r) {
-                            BroadcastRange.ALL -> allPlayers.forEach { _, p -> p.sendTip(msg) }
-                            BroadcastRange.PLAYING -> playingPlayers.forEach { s -> allPlayers[s]?.sendTip(msg) }
-                            BroadcastRange.WATCH -> watchers.forEach { s -> allPlayers[s]?.sendTip(msg) }
+                            BroadcastRange.ALL -> allPlayers.filter { !except.contains(it.key) }.forEach { _, p -> p.sendTip(msg) }
+                            BroadcastRange.PLAYING -> playingPlayers.filter { !except.contains(it) }.forEach { s -> allPlayers[s]?.sendTip(msg) }
+                            BroadcastRange.WATCH -> watchers.filter { !except.contains(it) }.forEach { s -> allPlayers[s]?.sendTip(msg) }
                             else -> {
                             }
                         }
                     }
                     BroadcastType.POP -> {
                         when (r) {
-                            BroadcastRange.ALL -> allPlayers.forEach { _, p -> p.sendPopup(msg) }
-                            BroadcastRange.PLAYING -> playingPlayers.forEach { s -> allPlayers[s]?.sendPopup(msg) }
-                            BroadcastRange.WATCH -> watchers.forEach { s -> allPlayers[s]?.sendPopup(msg) }
+                            BroadcastRange.ALL -> allPlayers.filter { !except.contains(it.key) }.forEach { _, p -> p.sendPopup(msg) }
+                            BroadcastRange.PLAYING -> playingPlayers.filter { !except.contains(it) }.forEach { s -> allPlayers[s]?.sendPopup(msg) }
+                            BroadcastRange.WATCH -> watchers.filter { !except.contains(it) }.forEach { s -> allPlayers[s]?.sendPopup(msg) }
                             else -> {
                             }
                         }
                     }
                 }
             }
-            if (flag) (this as CanDeathGameInstance).broadcast0(type, msg, range, null, false)
+            if (flag) (this as CanDeathGameInstance).broadcast0(type, msg, except, range, null, false)
         } else {
             val sent = hashSetOf<String>()
             when (type) {
                 BroadcastType.MESSAGE -> {
-                    range.forEach {
-                        when (it) {
-                            BroadcastRange.ALL -> allPlayers.forEach { _, p ->
-                                if (!sent.contains(p.name)) {
+                    range.forEach { r ->
+                        when (r) {
+                            BroadcastRange.ALL -> allPlayers.filter { !except.contains(it.key) && !sent.contains(it.key) }.forEach { _, p ->
                                     p.sendMessage(msg)
                                     sent.add(p.name)
-                                }
+
                             }
-                            BroadcastRange.PLAYING -> playingPlayers.forEach { s ->
-                                if (!sent.contains(s)) {
-                                    allPlayers[s]?.sendMessage(msg)
-                                    sent.add(s)
-                                }
+                            BroadcastRange.PLAYING -> playingPlayers.filter { !except.contains(it) && !sent.contains(it) }.forEach { s ->
+                                allPlayers[s]?.sendMessage(msg)
+                                sent.add(s)
                             }
-                            BroadcastRange.WATCH -> watchers.forEach { s ->
-                                if (!sent.contains(s)) {
-                                    allPlayers[s]?.sendMessage(msg)
-                                    sent.add(s)
-                                }
+                            BroadcastRange.WATCH -> watchers.filter { !except.contains(it) && !sent.contains(it) }.forEach { s ->
+                                allPlayers[s]?.sendMessage(msg)
+                                sent.add(s)
                             }
                             else -> return
                         }
                     }
                 }
                 BroadcastType.TIP -> {
-                    range.forEach {
-                        when (it) {
-                            BroadcastRange.ALL -> allPlayers.forEach { _, p ->
-                                if (!sent.contains(p.name)) {
+                    range.forEach { r ->
+                        when (r) {
+                            BroadcastRange.ALL -> allPlayers.filter { !except.contains(it.key) && !sent.contains(it.key) }.forEach { _, p ->
                                     p.sendTip(msg)
                                     sent.add(p.name)
-                                }
+
                             }
-                            BroadcastRange.PLAYING -> playingPlayers.forEach { s ->
-                                if (!sent.contains(s)) {
+                            BroadcastRange.PLAYING -> playingPlayers.filter { !except.contains(it) && !sent.contains(it) }.forEach { s ->
                                     allPlayers[s]?.sendTip(msg)
                                     sent.add(s)
-                                }
+
                             }
-                            BroadcastRange.WATCH -> watchers.forEach { s ->
-                                if (!sent.contains(s)) {
+                            BroadcastRange.WATCH -> watchers.filter { !except.contains(it) && !sent.contains(it) }.forEach { s ->
+
                                     allPlayers[s]?.sendTip(msg)
                                     sent.add(s)
-                                }
+
                             }
                             else -> {
                             }
@@ -119,25 +115,22 @@ abstract class GameInstance(val room: GameRoom) {
                     }
                 }
                 BroadcastType.POP -> {
-                    range.forEach {
-                        when (it) {
-                            BroadcastRange.ALL -> allPlayers.forEach { _, p ->
-                                if (!sent.contains(p.name)) {
-                                    p.sendMessage(msg)
-                                    sent.add(p.name)
-                                }
+                    range.forEach { r ->
+                        when (r) {
+                            BroadcastRange.ALL -> allPlayers.filter { !except.contains(it.key) && !sent.contains(it.key) }.forEach { _, p ->
+                                p.sendMessage(msg)
+                                sent.add(p.name)
                             }
-                            BroadcastRange.PLAYING -> playingPlayers.forEach { s ->
-                                if (!sent.contains(s)) {
+                            BroadcastRange.PLAYING -> playingPlayers.filter { !except.contains(it) && !sent.contains(it) }.forEach { s ->
+
                                     allPlayers[s]?.sendPopup(msg)
                                     sent.add(s)
-                                }
                             }
-                            BroadcastRange.WATCH -> watchers.forEach { s ->
-                                if (!sent.contains(s)) {
+                            BroadcastRange.WATCH -> watchers.filter { !except.contains(it) && !sent.contains(it) }.forEach { s ->
+
                                     allPlayers[s]?.sendPopup(msg)
                                     sent.add(s)
-                                }
+
                             }
                             else -> {
                             }
@@ -145,38 +138,38 @@ abstract class GameInstance(val room: GameRoom) {
                     }
                 }
             }
-            if (flag) (this as CanDeathGameInstance).broadcast0(type, msg, range, sent, true)
+            if (flag) (this as CanDeathGameInstance).broadcast0(type, msg, except, range, sent, true)
         }
         return
     }
 
-    open fun sendTitle(msg: String, subMessage: String = "", fadeIn: Int = 10, stay: Int = 30, fadeOut: Int = 10, vararg range: BroadcastRange = arrayOf(BroadcastRange.ALL)) {
+    open fun sendTitle(msg: String, subMessage: String = "", fadeIn: Int = 10, stay: Int = 30, fadeOut: Int = 10, except: Array<String>, vararg range: BroadcastRange = arrayOf(BroadcastRange.ALL)) {
         val flag = this is CanDeathGameInstance && range.isNeedTransmit()
         if (!range.isOverlap()) {
             when (range) {
-                BroadcastRange.ALL -> allPlayers.forEach { _, p -> p.sendTitle(msg, subMessage, fadeIn, stay, fadeOut) }
-                BroadcastRange.PLAYING -> playingPlayers.forEach { s -> allPlayers[s]?.sendTitle(msg, subMessage, fadeIn, stay, fadeOut) }
-                BroadcastRange.WATCH -> watchers.forEach { s -> allPlayers[s]?.sendTitle(msg, subMessage, fadeIn, stay, fadeOut) }
+                BroadcastRange.ALL -> allPlayers.filter { !except.contains(it.key) }.forEach { _, p -> p.sendTitle(msg, subMessage, fadeIn, stay, fadeOut) }
+                BroadcastRange.PLAYING -> playingPlayers.filter { !except.contains(it) }.forEach { s -> allPlayers[s]?.sendTitle(msg, subMessage, fadeIn, stay, fadeOut) }
+                BroadcastRange.WATCH -> watchers.filter { !except.contains(it) }.forEach { s -> allPlayers[s]?.sendTitle(msg, subMessage, fadeIn, stay, fadeOut) }
                 else -> {
                 }
             }
-            if (flag) (this as CanDeathGameInstance).sendTitle0(msg, subMessage, fadeIn, stay, fadeOut, range, null, false)
+            if (flag) (this as CanDeathGameInstance).sendTitle0(msg, subMessage, fadeIn, stay, fadeOut, except, range, null, false)
         } else {
             val sent = hashSetOf<String>()
             when (range) {
-                BroadcastRange.ALL -> allPlayers.forEach { _, p ->
+                BroadcastRange.ALL -> allPlayers.filter { !except.contains(it.key) && !sent.contains(it.key) }.forEach { _, p ->
                     if (!sent.contains(p.name)) {
                         p.sendTitle(msg, subMessage, fadeIn, stay, fadeOut)
                         sent.add(p.name)
                     }
                 }
-                BroadcastRange.PLAYING -> playingPlayers.forEach { s ->
+                BroadcastRange.PLAYING -> playingPlayers.filter { !except.contains(it) && !sent.contains(it) }.forEach { s ->
                     if (!sent.contains(s)) {
                         allPlayers[s]?.sendTitle(msg, subMessage, fadeIn, stay, fadeOut)
                         sent.add(s)
                     }
                 }
-                BroadcastRange.WATCH -> watchers.forEach { s ->
+                BroadcastRange.WATCH -> watchers.filter { !except.contains(it) && !sent.contains(it) }.forEach { s ->
                     if (!sent.contains(s)) {
                         allPlayers[s]?.sendTitle(msg, subMessage, fadeIn, stay, fadeOut)
                         sent.add(s)
@@ -185,7 +178,9 @@ abstract class GameInstance(val room: GameRoom) {
                 else -> {
                 }
             }
-            if (flag) (this as CanDeathGameInstance).sendTitle0(msg, subMessage, fadeIn, stay, fadeOut, range, sent, true)
+            if (flag) (this as CanDeathGameInstance).sendTitle0(msg, subMessage, fadeIn, stay, fadeOut, except, range, sent, true)
         }
     }
 }
+
+fun String.gTranslate(type: Games, vararg params: Any) = GameTipData.tipData[type]!!.translate(this, params)
