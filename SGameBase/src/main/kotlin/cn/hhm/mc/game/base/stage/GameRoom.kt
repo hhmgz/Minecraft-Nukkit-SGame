@@ -13,6 +13,8 @@ abstract class GameRoom(val type: Games, val id: String) {
 
     var waitTime: Int = 30
     var fastWaitTime: Int = 5
+    var minOfPlayers: Int = 18
+    var maxOfPlayers: Int = 30
 
     open fun load(){
         this.configure(GameRoom.loadFromFile(this))

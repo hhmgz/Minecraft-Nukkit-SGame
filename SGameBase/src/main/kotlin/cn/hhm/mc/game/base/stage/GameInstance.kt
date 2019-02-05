@@ -6,6 +6,7 @@ import cn.hhm.mc.game.base.utils.*
 
 abstract class GameInstance(val room: GameRoom) {
     val serialNumber = room.used++
+    val name = room.type.codeName + "_" + room.id + "_" + serialNumber
     val allPlayers: HashMap<String, NukkitPlayer> = hashMapOf()
     val playingPlayers: HashSet<String> = hashSetOf()
     val watchers: HashSet<String> = hashSetOf()
@@ -13,12 +14,29 @@ abstract class GameInstance(val room: GameRoom) {
     var stage: StageMode = StageMode.PRE_START
 
     open fun join(player: NukkitPlayer) {//玩家进入进行的操作，请在玩家真的进入房间后进行super.join(player)来进行一些可以避免重复的代码信息
+        this.addPlayer(player)
+        player.sendMessage("game.join.toEntrant" gTranslate arrayOf(name))
+        this.broadcast(BroadcastType.MESSAGE, "game.join.toOthers" gTranslate arrayOf(player.name, numberOfPlayers, room.maxOfPlayers), arrayOf(player.name))
+    }
+
+    open fun quit(player: NukkitPlayer) {//玩家退出进行的操作，请在玩家真的进入房间后进行super.quit(player)来进行一些可以避免重复的代码信息
+        this.delPlayer(player)
+        player.sendMessage("game.quit.toEntrant" gTranslate arrayOf(name))
+        this.broadcast(BroadcastType.MESSAGE, "game.quit.toOthers" gTranslate arrayOf(player.name, numberOfPlayers, room.maxOfPlayers), arrayOf(player.name))
+
+    }
+
+    open fun addPlayer(player: NukkitPlayer) {
         allPlayers[player.name] = player
         numberOfPlayers++
         player.gameInfo = arrayOf(room.type, room.id, serialNumber)
     }
 
-    abstract fun quit(player: NukkitPlayer)//玩家退出进行的操作，请在玩家真的进入房间后进行super.quit(player)来进行一些可以避免重复的代码信息
+    open fun delPlayer(player: NukkitPlayer) {
+        allPlayers.remove(player.name)
+        player.gameInfo = arrayOf()
+        numberOfPlayers--
+    }
 
     abstract fun start()//游戏开始时进行的操作
 
@@ -26,8 +44,23 @@ abstract class GameInstance(val room: GameRoom) {
 
     abstract fun waitTick()
 
+    open fun kickAllPlayers(reason: String, cause: String) {
+
+    }
+
+    open fun kick(name: String, reason: String, cause: String) {
+
+    }
+
     open fun reward() {//奖励 默认空
 
+    }
+
+    open fun checkNumberOfPlayers() {
+        if (numberOfPlayers <= 0) {
+            this.kickAllPlayers("人数过少,系统自动关闭实例", "系统")
+            this.close()
+        }
     }
 
     infix fun String.gTranslate(params: Array<out Any>) = GameTipData.tipData[room.type]!!.translate(this, params)
@@ -180,6 +213,10 @@ abstract class GameInstance(val room: GameRoom) {
             }
             if (flag) (this as CanDeathGameInstance).sendTitle0(msg, subMessage, fadeIn, stay, fadeOut, except, range, sent, true)
         }
+    }
+
+    open fun close() {
+
     }
 }
 
