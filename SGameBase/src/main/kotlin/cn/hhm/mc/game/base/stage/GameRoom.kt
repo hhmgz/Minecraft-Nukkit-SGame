@@ -18,6 +18,7 @@ abstract class GameRoom(val type: Games, val id: String) {
     var gamingTaskClass: Class<out GamePlayingTask> = GamePlayingTask::class.java
 
     var waitTime: Int = 30
+    var gamingTime: Int = 600
     var fastWaitTime: Int = 5
     var minOfPlayers: Int = 18
     var maxOfPlayers: Int = 30
@@ -35,7 +36,7 @@ abstract class GameRoom(val type: Games, val id: String) {
     @Synchronized
     open fun join(player: NukkitPlayer) {
         if (waitingInstance.isEmpty()) {
-            val newInstance: GameInstance = type.instance.gameInstance.getConstructor(GameRoom::class.java).newInstance(this)
+            val newInstance: GameInstance = type.instance.gameInstanceClass.getConstructor(GameRoom::class.java).newInstance(this)
             newInstance.join(player)
             runningInstance[newInstance.serialNumber] = newInstance
             if (newInstance.stage == StageMode.WAITING) {

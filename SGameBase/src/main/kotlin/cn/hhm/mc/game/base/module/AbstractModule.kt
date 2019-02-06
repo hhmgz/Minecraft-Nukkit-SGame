@@ -1,5 +1,6 @@
 package cn.hhm.mc.game.base.module
 
+import cn.nukkit.Server
 import java.io.File
 
 /**
@@ -21,5 +22,9 @@ abstract class AbstractModule(val file: File) {
 
     open fun onEnable() {
 
+    }
+
+    open fun info(msg: String) {
+        Server.getInstance().logger.info(msg)
     }
 }
