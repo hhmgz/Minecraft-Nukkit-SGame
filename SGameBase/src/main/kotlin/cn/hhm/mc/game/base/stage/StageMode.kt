@@ -7,6 +7,7 @@ package cn.hhm.mc.game.base.stage
  * @version 1.0
  */
 enum class StageMode(private val mode: Int) {
+    WAITING(0),
     PRE_START(1),
     START(2),
     FINNISH(3),
