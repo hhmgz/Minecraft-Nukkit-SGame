@@ -21,6 +21,13 @@ import kotlin.collections.LinkedHashMap
  */
 class Config(var file: File, private var data: ConfigData) : ConfigOperation {
     var type: ConfigType = ConfigType.DETECT
+    var content: LinkedHashMap<String, Any>
+        get() = data.getAll()
+        set(value) {
+            data.clear()
+            value.forEach { t, u -> data[t] = u }
+        }
+
     private var correct = false
 
     constructor(file: String) : this(File(file))
@@ -181,7 +188,7 @@ class Config(var file: File, private var data: ConfigData) : ConfigOperation {
             if (v is Boolean) {
                 v = if (v) "on" else "off"
             }
-            content += k + "=" + v.toString() + "\r\n"
+            content += "$k=$v\r\n"
         }
         return content
     }
@@ -224,6 +231,10 @@ class Config(var file: File, private var data: ConfigData) : ConfigOperation {
     fun save(file: File): Boolean {
         this.file = file
         return save()
+    }
+
+    fun clear() {
+        this.data.clear()
     }
 
     fun save(): Boolean {

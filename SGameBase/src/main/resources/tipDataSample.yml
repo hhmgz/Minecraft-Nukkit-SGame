@@ -14,6 +14,7 @@ game.kick.toOthers: "§7<§b%1§7> §6被踢出了房间! (%2/%3)" #被踢出游
 game.wait.countDown.stop: "%GAME_MAIN_TITLE§l§6人数过少,停止倒计时" #倒计时停止
 game.wait.countDown.final: "§l§%1%1" #倒计时<10s
 game.wait.countDown.beginning: "%GAME_MAIN_TITLE§l§6距离游戏开始还有%1秒" #倒计时>10s
+game.wait.countDown.fast: "%GAME_MAIN_TITLE§l§6达到最大游戏人数,%1秒后开始游戏" #倒计时>10s
 
 game.start.go: "%GAME_MAIN_TITLE§l§2游戏开始!" #游戏开始提醒
 

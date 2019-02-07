@@ -1,0 +1,26 @@
+1:
+  Name: "建筑工人"
+  Items:
+    DiamondDraftH:
+      Item: "278:0"
+      Count: 1
+      DisplayName: " §d铁镐 - 售价 §6铜x§f{c} §f银x§f{s} §e金x§f{g} §b钻石x§f{d}"
+      Name: "default"
+      Enchant: ["1:3"]
+      Need:
+        Copper: 0
+        Silver: 0
+        Gold: 6
+2:
+  Name: "野蛮人"
+  Items:
+    DiamondDraftH:
+      Item: "278:0"
+      Count: 1
+      DisplayName: " §d铁镐 - 售价 §6铜x§f{c} §f银x§f{s} §e金x§f{g} §b钻石x§f{d}"
+      Name: "default"
+      Enchant: ["1:3"]
+      Need:
+        Copper: 0
+        Silver: 0
+        Gold: 6

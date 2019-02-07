@@ -1,0 +1,7 @@
+type: "GAME"
+name: "SBedWars"
+version: "0.0.1-A"
+author: "hhm"
+description: "起床战争"
+main: "cn.hhm.mc.game.bedwars.SBedWars"
+key: "D0$AjLb0#OS1afukmILtjL@jYme7Zm%o4U6^I1r^@t9bap0vE2cg!fMnvGA6Y@cR"

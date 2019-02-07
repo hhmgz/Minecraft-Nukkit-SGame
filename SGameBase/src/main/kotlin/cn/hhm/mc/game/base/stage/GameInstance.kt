@@ -93,6 +93,11 @@ abstract class GameInstance(val room: GameRoom) {
             this.waitTask = null
             return
         }
+        if (this.numberOfPlayers == room.maxOfPlayers) {
+            this.broadcast(BroadcastType.MESSAGE, "game.wait.countDown.fast" gTranslate arrayOf(room.fastWaitTime), arrayOf(), BroadcastRange.ALL)
+            waitTask!!.tick = room.fastWaitTime
+            return
+        }
     }
 
     open fun restorePlayerOriginalState(player: NukkitPlayer) {

@@ -9,20 +9,17 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>cn.hhm.mc.game.base</groupId>
-    <artifactId>SGameBase</artifactId>
+    <groupId>cn.hhm.mc.game.bedwars</groupId>
+    <artifactId>SBedWars</artifactId>
+    <version>0.0.1-DEV</version>
+
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
-            <groupId>cn.hhm.mc.game</groupId>
-            <artifactId>SGame</artifactId>
+            <groupId>cn.hhm.mc.game.base</groupId>
+            <artifactId>SGameBase</artifactId>
             <version>0.0.1-DEV</version>
-        </dependency>
-        <dependency>
-            <groupId>money</groupId>
-            <artifactId>Money</artifactId>
-            <version>3.3</version>
-            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>

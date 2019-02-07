@@ -1,5 +1,6 @@
 package cn.hhm.mc.game.base.utils
 
+import cn.hhm.mc.game.base.data.PlayerData
 import cn.hhm.mc.game.base.gui.NukkitGraphicalUserInterface
 import cn.hhm.mc.game.base.gui.function.Variable
 import cn.nukkit.Player
@@ -17,6 +18,7 @@ import cn.nukkit.network.protocol.ModalFormRequestPacket
 class NukkitPlayer(`interface`: SourceInterface, clientID: Long?, ip: String, port: Int) : Player(`interface`, clientID, ip, port) {
     val guiParams: HashMap<String, Array<out Any>> = hashMapOf()
     var gameInfo: Array<Any> = arrayOf()
+    lateinit var gameData: PlayerData
 
     fun getFormWindowCount() = this.formWindowCount
 

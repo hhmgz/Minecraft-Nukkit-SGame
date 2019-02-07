@@ -2,6 +2,7 @@ package cn.hhm.mc.game.base.utils
 
 import cn.hhm.mc.game.base.error.PositionInformationConversionException
 import cn.nukkit.Server
+import cn.nukkit.level.Level
 import cn.nukkit.level.Location
 import cn.nukkit.level.Position
 
@@ -14,6 +15,11 @@ fun String.toPosition(): Position {
     } catch (e: Throwable) {
         throw PositionInformationConversionException(e)
     }
+}
+
+@Suppress("UNCHECKED_CAST")
+fun <T> Any?.cast(): T {
+    return this as T
 }
 
 fun String.toLocation(): Location {
@@ -30,6 +36,11 @@ fun String.toLocation(): Location {
 fun Location.asString(): String = "${this.floorX}:${this.floorY}:${this.floorZ}:${this.yaw.toInt()}:${this.pitch.toInt()}:${this.level.name}"
 
 fun Position.asString(): String = "${this.floorX}:${this.floorY}:${this.floorZ}:${this.level.name}"
+
+fun String.toLevel(): Level {
+    if (!NukkitUtils.isLoadedWorld(this)) throw PositionInformationConversionException(RuntimeException("不存在此世界:$this"))
+    return Server.getInstance().getLevelByName(this)
+}
 
 object NukkitUtils {
     @JvmStatic

@@ -1,5 +1,6 @@
 package cn.hhm.mc.game.base
 
+import cn.hhm.mc.game.base.config.MasterConfig
 import cn.hhm.mc.game.base.gui.listener.GUIListener
 import cn.hhm.mc.game.base.kernel.PluginKernel
 import cn.hhm.mc.game.base.listener.NormalListener
@@ -16,9 +17,13 @@ import cn.nukkit.plugin.PluginBase
  */
 class SGameBase : PluginBase() {
     lateinit var kernel: PluginKernel
+    lateinit var masterConfig: MasterConfig
 
     override fun onLoad() {
         NukkitBugFixer.fix()
+        masterConfig = MasterConfig()
+        masterConfig.load()
+        masterConfig.save()
         kernel = PluginKernel(this.file)
         kernel.onLoad()
     }
@@ -43,6 +48,7 @@ class SGameBase : PluginBase() {
     }
 
     companion object {
+        const val TITLE = ""
         lateinit var instance: SGameBase
         val gameTypes: ArrayList<Games> = arrayListOf()
         val gameModules: HashMap<Games,GameBase> = hashMapOf()

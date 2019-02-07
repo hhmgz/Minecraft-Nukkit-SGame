@@ -53,6 +53,8 @@ abstract class GameRoom(val type: Games, val id: String) {
 
     abstract fun save()
 
+    abstract fun getData(): MutableMap<String, Any>
+
     abstract fun configure(data: MutableMap<String,Any>)
 
     fun getWaitTask(instance: GameInstance) = waitTaskClass.getConstructor(GameInstance::class.java).newInstance(instance)
