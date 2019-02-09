@@ -21,7 +21,7 @@
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_5">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
@@ -30,7 +30,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/kotlin" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
-    <orderEntry type="jdk" jdkName="11" jdkType="JavaSDK" />
+    <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="SGameBase" />
     <orderEntry type="module" module-name="SGame" />
@@ -48,5 +48,8 @@
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpclient:4.5.6" level="project" />
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpcore:4.4.10" level="project" />
     <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.10" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpasyncclient:4.1.4" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpcore-nio:4.4.10" level="project" />
+    <orderEntry type="library" name="Maven: org.projectlombok:lombok:1.16.18" level="project" />
   </component>
 </module>

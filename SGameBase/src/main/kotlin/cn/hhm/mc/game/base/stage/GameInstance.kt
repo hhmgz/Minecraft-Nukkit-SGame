@@ -2,6 +2,7 @@ package cn.hhm.mc.game.base.stage
 
 import cn.hhm.mc.game.base.data.GameTipData
 import cn.hhm.mc.game.base.stage.instance.CanDeathGameInstance
+import cn.hhm.mc.game.base.stage.task.GamePlayingTask
 import cn.hhm.mc.game.base.stage.task.GameWaitTask
 import cn.hhm.mc.game.base.utils.*
 import cn.nukkit.Player
@@ -16,6 +17,7 @@ abstract class GameInstance(val room: GameRoom) {
     var numberOfPlayers: Int = 0
     var stage: StageMode = StageMode.WAITING
     var waitTask: GameWaitTask? = null
+    var gamingTask: GamePlayingTask? = null
 
     @Synchronized
     open fun join(player: NukkitPlayer) {//玩家进入进行的操作，请在玩家真的进入房间后进行super.join(player)来进行一些可以避免重复的代码信息
@@ -50,6 +52,8 @@ abstract class GameInstance(val room: GameRoom) {
     abstract fun start()//游戏开始时进行的操作
 
     abstract fun stop()//游戏结束时的操作
+
+    abstract fun onFinished()
 
     abstract fun waitTick(tick: Int)
 
@@ -259,6 +263,45 @@ abstract class GameInstance(val room: GameRoom) {
                 }
             }
             if (flag) (this as CanDeathGameInstance).sendTitle0(msg, subMessage, fadeIn, stay, fadeOut, except, range, sent, true)
+        }
+    }
+
+    open fun sendScoreboard(title: String, data: Array<String>, except: Array<String>, vararg range: BroadcastRange = arrayOf(BroadcastRange.ALL)) {
+        val flag = this is CanDeathGameInstance && range.isNeedTransmit()
+        if (!range.isOverlap()) {
+            when (range) {
+                BroadcastRange.ALL -> allPlayers.filter { !except.contains(it.key) }.forEach { _, p -> p.sendScoreboard(title, data) }
+                BroadcastRange.PLAYING -> playingPlayers.filter { !except.contains(it) }.forEach { s -> allPlayers[s]?.sendScoreboard(title, data) }
+                BroadcastRange.WATCH -> watchers.filter { !except.contains(it) }.forEach { s -> allPlayers[s]?.sendScoreboard(title, data) }
+                else -> {
+                }
+            }
+            if (flag) (this as CanDeathGameInstance).sendScoreboard0(title, data, except, range, null, false)
+        } else {
+            val sent = hashSetOf<String>()
+            when (range) {
+                BroadcastRange.ALL -> allPlayers.filter { !except.contains(it.key) && !sent.contains(it.key) }.forEach { _, p ->
+                    if (!sent.contains(p.name)) {
+                        p.sendScoreboard(title, data)
+                        sent.add(p.name)
+                    }
+                }
+                BroadcastRange.PLAYING -> playingPlayers.filter { !except.contains(it) && !sent.contains(it) }.forEach { s ->
+                    if (!sent.contains(s)) {
+                        allPlayers[s]?.sendScoreboard(title, data)
+                        sent.add(s)
+                    }
+                }
+                BroadcastRange.WATCH -> watchers.filter { !except.contains(it) && !sent.contains(it) }.forEach { s ->
+                    if (!sent.contains(s)) {
+                        allPlayers[s]?.sendScoreboard(title, data)
+                        sent.add(s)
+                    }
+                }
+                else -> {
+                }
+            }
+            if (flag) (this as CanDeathGameInstance).sendScoreboard0(title, data, except, range, sent, true)
         }
     }
 

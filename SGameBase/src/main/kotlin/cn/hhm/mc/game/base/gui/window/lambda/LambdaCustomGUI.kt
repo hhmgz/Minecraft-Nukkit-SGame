@@ -53,7 +53,7 @@ open class LambdaCustomGUI @JvmOverloads constructor(id: String, title: String, 
                     val chose = elementData.toInt()
                     val the = HashMap<String, Any>()
                     the["id"] = chose
-                    the["data"] = e.options[chose]
+                    the["floatingTextMap"] = e.options[chose]
                     map[this.partIds[i]] = the
                 }
                 is ElementInput -> {
@@ -66,7 +66,7 @@ open class LambdaCustomGUI @JvmOverloads constructor(id: String, title: String, 
                     val chose = elementData.toInt()
                     val the = HashMap<String, Any>()
                     the["id"] = chose
-                    the["data"] = e.steps[chose]
+                    the["floatingTextMap"] = e.steps[chose]
                     map[this.partIds[i]] = the
                 }
                 is ElementToggle -> {

@@ -95,7 +95,7 @@ abstract class CanDeathGameInstance(room: GameRoom) : GameInstance(room) {
                         sent.add(s)
                     }
                 } else {
-                    allPlayers[s]?.sendTip(msg)
+                    allPlayers[s]?.sendTitle(msg, subMessage, fadeIn, stay, fadeOut)
                 }
             }
         }
@@ -107,7 +107,35 @@ abstract class CanDeathGameInstance(room: GameRoom) : GameInstance(room) {
                         sent.add(s)
                     }
                 } else {
-                    allPlayers[s]?.sendTip(msg)
+                    allPlayers[s]?.sendTitle(msg, subMessage, fadeIn, stay, fadeOut)
+                }
+            }
+        }
+    }
+
+    fun sendScoreboard0(title: String, data: Array<String>, except: Array<String>, range: Array<out BroadcastRange>, sent: HashSet<String>?, overlap: Boolean) {
+        if (overlap) sent ?: return
+        if (range.contains(BroadcastRange.ALIVE)) {
+            alivePlayers.filter { !except.contains(it) }.forEach { s ->
+                if (overlap) {
+                    if (!sent!!.contains(s)) {
+                        allPlayers[s]?.sendScoreboard(title, data)
+                        sent.add(s)
+                    }
+                } else {
+                    allPlayers[s]?.sendScoreboard(title, data)
+                }
+            }
+        }
+        if (range.contains(BroadcastRange.DEATHWATCH)) {
+            deathPlayers.filter { !except.contains(it) }.forEach { s ->
+                if (overlap) {
+                    if (!sent!!.contains(s)) {
+                        allPlayers[s]?.sendScoreboard(title, data)
+                        sent.add(s)
+                    }
+                } else {
+                    allPlayers[s]?.sendScoreboard(title, data)
                 }
             }
         }

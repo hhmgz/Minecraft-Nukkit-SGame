@@ -3,6 +3,7 @@ package cn.hhm.mc.game.base.utils
 import cn.hhm.mc.game.base.data.PlayerData
 import cn.hhm.mc.game.base.gui.NukkitGraphicalUserInterface
 import cn.hhm.mc.game.base.gui.function.Variable
+import cn.hhm.mc.game.base.utils.scoreboard.ScoreboardAPI
 import cn.nukkit.Player
 import cn.nukkit.network.SourceInterface
 import cn.nukkit.network.protocol.ModalFormRequestPacket
@@ -19,6 +20,7 @@ class NukkitPlayer(`interface`: SourceInterface, clientID: Long?, ip: String, po
     val guiParams: HashMap<String, Array<out Any>> = hashMapOf()
     var gameInfo: Array<Any> = arrayOf()
     lateinit var gameData: PlayerData
+    var scoreboard = ScoreboardAPI.builder().build()
 
     fun getFormWindowCount() = this.formWindowCount
 
@@ -39,4 +41,31 @@ class NukkitPlayer(`interface`: SourceInterface, clientID: Long?, ip: String, po
     }
 
     fun showGUI(gui: NukkitGraphicalUserInterface): Int = showGUI(gui.data, gui)
+
+    fun setScoreboardConnect(title: String, vararg data: String) {
+        scoreboard = ScoreboardAPI.builder().build()
+        scoreboard.setDisplayName(title)
+        var max = 0
+        data.forEachIndexed { index, s ->
+            max = kotlin.math.max(s.length, max)
+            scoreboard.setScore((index + 2).toLong(), s, index + 2)
+        }
+        var string = " "
+        for (i in 0..max) string += '-'
+        scoreboard.setScore(1, "$string ", 1)
+    }
+
+    fun showScoreboard() {
+        scoreboard.addPlayer(this)
+    }
+
+    fun hideScoreboard() {
+        scoreboard.despawnFrom(this)
+    }
+
+    fun sendScoreboard(title: String, data: Array<String>) {
+        this.hideScoreboard()
+        this.setScoreboardConnect(title, *data)
+        this.showScoreboard()
+    }
 }

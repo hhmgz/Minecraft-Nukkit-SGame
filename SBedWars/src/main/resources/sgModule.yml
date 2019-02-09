@@ -1,6 +1,6 @@
 type: "GAME"
 name: "SBedWars"
-version: "0.0.1-A"
+version: "0.0.1-Alpha"
 author: "hhm"
 description: "起床战争"
 main: "cn.hhm.mc.game.bedwars.SBedWars"

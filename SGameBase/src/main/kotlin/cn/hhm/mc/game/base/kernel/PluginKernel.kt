@@ -12,7 +12,7 @@ import java.io.File
  * @author hhm Copyright (c) 2018/8/23
  * version 1.0
  */
-class PluginKernel(file: File) : AbstractModule(file) {
+class PluginKernel(file: File) : AbstractModule("SKernel", file) {
     lateinit var cl: KernelClassLoader
     private lateinit var base: PluginBase
     lateinit var ksc: Class<*>

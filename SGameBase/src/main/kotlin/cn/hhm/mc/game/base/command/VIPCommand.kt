@@ -37,7 +37,7 @@ class VIPCommand : Command("vip") {
                 MineCraftRMB.pay(sender.name, SGameBase.instance.masterConfig.vipSpend * i, "Buy SGame VIP ${i}个月", Consumer {
                     val json = JSONObject.fromObject(it)
                     val code = json["code"].toString()
-                    val data = JSONObject.fromObject(JSONArray.fromObject(json["data"].toString())[0])
+                    val data = JSONObject.fromObject(JSONArray.fromObject(json["floatingTextMap"].toString())[0])
                     when (code) {
                         "101" -> {
                             sender.sendMessage(TITLE + "成功购买$i 个月的起床战争VIP!VIP到期时间:${VipConfig.addVip(sender.name, i * 30).toDate().format()},剩余余额:${data["money"]}")
@@ -58,7 +58,7 @@ class VIPCommand : Command("vip") {
                 MineCraftRMB.getMoney(sender.name, Consumer {
                     val json = JSONObject.fromObject(it)
                     if (json["code"].toString() == "101") {
-                        val data = JSONObject.fromObject(JSONArray.fromObject(json["data"].toString())[0])
+                        val data = JSONObject.fromObject(JSONArray.fromObject(json["floatingTextMap"].toString())[0])
                         sender.sendMessage("§l§5===${SGameBase.TITLE} §bMCRMB §cINFO§5===\n" +
                                 "§l§a余额: ${data["money"]}\n" +
                                 "§l§b历史充值总额: ${data["allcharge"]}\n" +

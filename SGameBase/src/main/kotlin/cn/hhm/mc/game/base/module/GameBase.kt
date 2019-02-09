@@ -12,7 +12,7 @@ import java.io.File
  * @author hhm Copyright (c) 2018/12/22/星期六 23:04
  * version 1.0
  */
-abstract class GameBase(val type: Games, val pluginName: String, file: File) : AbstractModule(file) {
+abstract class GameBase(val type: Games, val pluginName: String, file: File) : AbstractModule(pluginName, file) {
     val gameRooms: HashMap<Int, GameRoom> = hashMapOf()
     var gameRoomClass: Class<out GameRoom> = GameRoom::class.java
     var gameInstanceClass: Class<out GameInstance> = GameInstance::class.java

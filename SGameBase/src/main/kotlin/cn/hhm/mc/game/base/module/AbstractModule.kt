@@ -9,7 +9,7 @@ import java.io.File
  * @author hhm Copyright (c) 2018/12/22/星期六 22:57
  * version 1.0
  */
-abstract class AbstractModule(val file: File) {
+abstract class AbstractModule(val name: String, val file: File) {
     val absolutePath = file.absolutePath
 
     open fun onLoad() {

@@ -45,7 +45,7 @@ class Config(var file: File, private var data: ConfigData) : ConfigOperation {
     }
 
     init {
-        this.load()
+        this.load(data)
     }
 
     fun reload() {

@@ -24,6 +24,10 @@ class PlayerData(val name: String) {
     val isVip: Boolean
         get() = VipConfig.isVip(name)
 
+    init {
+        data.save()
+    }
+
     fun addExp(exp: Int) {
         var now = exp
         if (this.isVip) now *= 2

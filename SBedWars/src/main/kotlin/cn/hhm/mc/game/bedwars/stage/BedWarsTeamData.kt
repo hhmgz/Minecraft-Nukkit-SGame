@@ -5,6 +5,7 @@ import cn.nukkit.level.Location
 
 data class BedWarsTeamData(var id: Int, var spawnLocation: Location, var shopLocation: Location, var coreLocation: Location, var maxOfPlayers: Int) {
     val players: ArrayList<String> = arrayListOf()
+    val alivePlayers: ArrayList<String> = arrayListOf()
 
     fun toMap() = hashMapOf("spawnLocation" to spawnLocation.asString(), "shopLocation" to shopLocation.asString(), "coreLocation" to coreLocation.asString(), "maxOfPlayers" to maxOfPlayers)
 }

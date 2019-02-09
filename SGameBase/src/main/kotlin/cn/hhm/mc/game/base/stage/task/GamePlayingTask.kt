@@ -13,7 +13,7 @@ open class GamePlayingTask(val instance: GameInstance) : PluginTask<SGameBase>(S
         this.tick++
         instance.gamingTick(tick)
         if (this.checkFinished()) {
-            instance.stop()
+            instance.onFinished()
         }
     }
 

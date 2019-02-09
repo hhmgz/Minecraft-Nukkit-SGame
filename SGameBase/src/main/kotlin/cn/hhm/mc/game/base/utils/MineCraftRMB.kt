@@ -6,6 +6,7 @@ import org.apache.http.NameValuePair
 import org.apache.http.client.entity.UrlEncodedFormEntity
 import org.apache.http.client.methods.HttpPost
 import org.apache.http.concurrent.FutureCallback
+import org.apache.http.impl.nio.client.HttpAsyncClients
 import org.apache.http.util.EntityUtils
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
