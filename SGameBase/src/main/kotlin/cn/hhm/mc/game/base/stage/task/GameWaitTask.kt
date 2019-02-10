@@ -1,8 +1,8 @@
 package cn.hhm.mc.game.base.stage.task
 
 import cn.hhm.mc.game.base.SGameBase
+import cn.hhm.mc.game.base.data.translate
 import cn.hhm.mc.game.base.stage.GameInstance
-import cn.hhm.mc.game.base.stage.gTranslate
 import cn.hhm.mc.game.base.utils.BroadcastRange
 import cn.hhm.mc.game.base.utils.BroadcastType
 import cn.hhm.mc.game.base.utils.Games
@@ -21,7 +21,7 @@ open class GameWaitTask(val instance: GameInstance) : PluginTask<SGameBase>(SGam
 
     open fun checkStart() {
         if (this.tick <= 0) {
-            instance.broadcast(BroadcastType.MESSAGE, "game.start.go".gTranslate(type), arrayOf(), BroadcastRange.ALIVE)
+            instance.broadcast(BroadcastType.MESSAGE, "base.game.start.go" translate arrayOf(), arrayOf(), BroadcastRange.ALIVE)
             instance.start()
             instance.waitTask = null
             this.cancel()
@@ -30,9 +30,9 @@ open class GameWaitTask(val instance: GameInstance) : PluginTask<SGameBase>(SGam
 
     open fun sendCountDownMessage() {
         if (tick > 10) {
-            instance.broadcast(BroadcastType.MESSAGE, "game.wait.countDown.beginning".gTranslate(type, tick), arrayOf())
+            instance.broadcast(BroadcastType.MESSAGE, "base.game.wait.countDown.beginning" translate arrayOf(tick), arrayOf())
         } else if (tick in 1..10) {
-            instance.sendTitle("game.wait.countDown.final".gTranslate(type, tick), type.mainTitle, arrayOf())
+            instance.sendTitle("base.game.wait.countDown.final" translate arrayOf(tick), type.mainTitle, arrayOf())
         }
     }
 }

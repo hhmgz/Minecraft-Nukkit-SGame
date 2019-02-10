@@ -1,7 +1,7 @@
 package cn.hhm.mc.game.base.gui
 
 import cn.hhm.mc.game.base.gui.function.Returnable
-import cn.hhm.mc.game.base.utils.NukkitPlayer
+import cn.hhm.mc.game.base.player.NukkitPlayer
 import cn.nukkit.form.window.FormWindow
 
 /**

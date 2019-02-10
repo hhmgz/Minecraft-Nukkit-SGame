@@ -1,4 +1,4 @@
-package cn.hhm.mc.game.base.utils
+package cn.hhm.mc.game.base.player
 
 import cn.hhm.mc.game.base.data.PlayerData
 import cn.hhm.mc.game.base.gui.NukkitGraphicalUserInterface
@@ -18,9 +18,9 @@ import cn.nukkit.network.protocol.ModalFormRequestPacket
 
 class NukkitPlayer(`interface`: SourceInterface, clientID: Long?, ip: String, port: Int) : Player(`interface`, clientID, ip, port) {
     val guiParams: HashMap<String, Array<out Any>> = hashMapOf()
-    var gameInfo: Array<Any> = arrayOf()
+    var gameInfo: PlayerGamingInformation? = null
     lateinit var gameData: PlayerData
-    var scoreboard = ScoreboardAPI.builder().build()
+    var scoreboard = ScoreboardAPI.build()
 
     fun getFormWindowCount() = this.formWindowCount
 
@@ -43,7 +43,7 @@ class NukkitPlayer(`interface`: SourceInterface, clientID: Long?, ip: String, po
     fun showGUI(gui: NukkitGraphicalUserInterface): Int = showGUI(gui.data, gui)
 
     fun setScoreboardConnect(title: String, vararg data: String) {
-        scoreboard = ScoreboardAPI.builder().build()
+        scoreboard = ScoreboardAPI.build()
         scoreboard.setDisplayName(title)
         var max = 0
         data.forEachIndexed { index, s ->

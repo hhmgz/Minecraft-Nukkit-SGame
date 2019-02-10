@@ -1,6 +1,5 @@
-package cn.hhm.mc.game.base.kernel.classload
+package cn.hhm.mc.game.base.module.classload
 
-import net.mcpes.hhm.kernel.EncryptedPluginClassLoader
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException

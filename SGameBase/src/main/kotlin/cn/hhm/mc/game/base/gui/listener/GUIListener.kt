@@ -6,7 +6,7 @@ import cn.hhm.mc.game.base.gui.NukkitGraphicalUserInterface.Companion.playerInGU
 import cn.hhm.mc.game.base.gui.event.PlayerGUIResultEvent
 import cn.hhm.mc.game.base.gui.window.EventGUI
 import cn.hhm.mc.game.base.gui.window.LambdaGUI
-import cn.hhm.mc.game.base.utils.NukkitPlayer
+import cn.hhm.mc.game.base.player.NukkitPlayer
 import cn.nukkit.Server
 import cn.nukkit.event.EventHandler
 import cn.nukkit.event.EventPriority

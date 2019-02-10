@@ -1,8 +1,8 @@
 package cn.hhm.mc.game.bedwars.shop
 
 import cn.hhm.mc.game.base.gui.window.lambda.defaults.LambdaVariableButtonGUI
+import cn.hhm.mc.game.base.player.NukkitPlayer
 import cn.hhm.mc.game.base.utils.ItemName
-import cn.hhm.mc.game.base.utils.NukkitPlayer
 import cn.hhm.mc.game.bedwars.SBedWars.Companion.TITLE
 import cn.hhm.mc.game.bedwars.shop.GUIShopBase.inLevel
 import cn.hhm.mc.game.bedwars.shop.GUIShopBase.inType

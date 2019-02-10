@@ -1,7 +1,7 @@
 package cn.hhm.mc.game.base.gui.event
 
 import cn.hhm.mc.game.base.gui.NukkitGraphicalUserInterface
-import cn.hhm.mc.game.base.utils.NukkitPlayer
+import cn.hhm.mc.game.base.player.NukkitPlayer
 import cn.nukkit.event.Event
 
 /**

@@ -1,6 +1,5 @@
 package cn.hhm.mc.game.base.module
 
-import cn.hhm.mc.game.base.data.GameTipData
 import cn.hhm.mc.game.base.stage.GameInstance
 import cn.hhm.mc.game.base.stage.GameRoom
 import cn.hhm.mc.game.base.utils.Games
@@ -12,15 +11,10 @@ import java.io.File
  * @author hhm Copyright (c) 2018/12/22/星期六 23:04
  * version 1.0
  */
-abstract class GameBase(val type: Games, val pluginName: String, file: File) : AbstractModule(pluginName, file) {
+abstract class GameBase(val type: Games) : AbstractModule() {
     val gameRooms: HashMap<Int, GameRoom> = hashMapOf()
     var gameRoomClass: Class<out GameRoom> = GameRoom::class.java
     var gameInstanceClass: Class<out GameInstance> = GameInstance::class.java
-    lateinit var tipData: GameTipData
-
-    override fun onLoad() {
-        tipData = GameTipData(this)
-    }
 
     open fun loadRooms() {
         var success = 0

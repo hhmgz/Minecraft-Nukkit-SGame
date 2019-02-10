@@ -1,0 +1,5 @@
+bw.game.wait.scoreboard.begining: "§l§f房间:%1%nl§f距离游戏开始还有§6%2§f秒"
+bw.game.team.choose.auto: "%TITLE你没有选择队伍,系统已自动帮你选择队伍为%1"
+bw.game.team.choose.manual: "%TITLE成功选择队伍为%1"
+bw.game.team.choose.tooMuch: "%TITLE队伍:%1人数太多了!请选择其他队伍!"
+bw.game.team.choose.max: "%TITLE队伍:%1已满员了!请选择其他队伍!"

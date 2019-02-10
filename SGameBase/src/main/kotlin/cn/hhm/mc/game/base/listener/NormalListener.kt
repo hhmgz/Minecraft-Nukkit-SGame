@@ -1,8 +1,8 @@
 package cn.hhm.mc.game.base.listener
 
 import cn.hhm.mc.game.base.data.PlayerData
+import cn.hhm.mc.game.base.player.NukkitPlayer
 import cn.hhm.mc.game.base.utils.GameUtils
-import cn.hhm.mc.game.base.utils.NukkitPlayer
 import cn.nukkit.Server
 import cn.nukkit.event.EventHandler
 import cn.nukkit.event.Listener

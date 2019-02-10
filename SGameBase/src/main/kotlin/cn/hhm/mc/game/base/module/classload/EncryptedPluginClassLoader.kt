@@ -1,6 +1,5 @@
-package net.mcpes.hhm.kernel
+package cn.hhm.mc.game.base.module.classload
 
-import cn.hhm.mc.game.base.kernel.classload.KernelClassLoader
 import cn.nukkit.Server
 import cn.nukkit.plugin.JavaPluginLoader
 import cn.nukkit.plugin.PluginLoader
@@ -77,7 +76,7 @@ class EncryptedPluginClassLoader(private val token: String, parent: ClassLoader,
 
         fun getJavaPluginLoader(): JavaPluginLoader {
             if (javaPluginLoader == null) {
-                val fileAssociations = this.getValue(Server.getInstance().pluginManager, "fileAssociations") as Map<String, PluginLoader>
+                val fileAssociations = getValue(Server.getInstance().pluginManager, "fileAssociations") as Map<String, PluginLoader>
                 var pl: PluginLoader? = null
                 fileAssociations.values.stream().forEach {
                     pl = it
@@ -90,14 +89,14 @@ class EncryptedPluginClassLoader(private val token: String, parent: ClassLoader,
 
         private fun getNukkitClasses(): HashMap<String, Class<*>> {
             if (nkClasses == null) {
-                val classes = this.getValue(this.getJavaPluginLoader(), "classes") as HashMap<String, Class<*>>
+                val classes = getValue(getJavaPluginLoader(), "classes") as HashMap<String, Class<*>>
                 nkClasses = classes
             }
             return nkClasses!!
         }
 
         fun setClass(name: String, clasz: Class<*>) {
-            this.getNukkitClasses()[name] = clasz
+            getNukkitClasses()[name] = clasz
         }
     }
 }

@@ -1,7 +1,7 @@
 package cn.hhm.mc.game.base.module
 
 import cn.nukkit.Server
-import java.io.File
+import cn.nukkit.plugin.PluginBase
 
 /**
  * SGame
@@ -9,20 +9,8 @@ import java.io.File
  * @author hhm Copyright (c) 2018/12/22/星期六 22:57
  * version 1.0
  */
-abstract class AbstractModule(val name: String, val file: File) {
+abstract class AbstractModule : PluginBase() {
     val absolutePath = file.absolutePath
-
-    open fun onLoad() {
-
-    }
-
-    open fun onDisable() {
-
-    }
-
-    open fun onEnable() {
-
-    }
 
     open fun info(msg: String) {
         Server.getInstance().logger.info(msg)

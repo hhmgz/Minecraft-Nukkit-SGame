@@ -1,10 +1,14 @@
 package cn.hhm.mc.game.base.stage
 
-import cn.hhm.mc.game.base.data.GameTipData
+import cn.hhm.mc.game.base.data.translate
+import cn.hhm.mc.game.base.player.NukkitPlayer
 import cn.hhm.mc.game.base.stage.instance.CanDeathGameInstance
 import cn.hhm.mc.game.base.stage.task.GamePlayingTask
 import cn.hhm.mc.game.base.stage.task.GameWaitTask
-import cn.hhm.mc.game.base.utils.*
+import cn.hhm.mc.game.base.utils.BroadcastRange
+import cn.hhm.mc.game.base.utils.BroadcastType
+import cn.hhm.mc.game.base.utils.isNeedTransmit
+import cn.hhm.mc.game.base.utils.isOverlap
 import cn.nukkit.Player
 import cn.nukkit.Server
 
@@ -23,28 +27,26 @@ abstract class GameInstance(val room: GameRoom) {
     open fun join(player: NukkitPlayer) {//玩家进入进行的操作，请在玩家真的进入房间后进行super.join(player)来进行一些可以避免重复的代码信息
         player.setGamemode(Player.ADVENTURE)
         this.addPlayer(player)
-        player.sendMessage("game.join.toEntrant" gTranslate arrayOf(name))
-        this.broadcast(BroadcastType.MESSAGE, "game.join.toOthers" gTranslate arrayOf(player.name, numberOfPlayers, room.maxOfPlayers), arrayOf(player.name))
+        player.sendMessage("base.game.join.toEntrant" translate arrayOf(name))
+        this.broadcast(BroadcastType.MESSAGE, "base.game.join.toOthers" translate arrayOf(player.name, numberOfPlayers, room.maxOfPlayers), arrayOf(player.name))
     }
 
     open fun quit(player: NukkitPlayer) {//玩家退出进行的操作，请在玩家真的进入房间后进行super.quit(player)来进行一些可以避免重复的代码信息
         this.restorePlayerOriginalState(player)
         player.teleport(room.stopLocation)
         this.delPlayer(player)
-        player.sendMessage("game.quit.toEntrant" gTranslate arrayOf(name))
-        this.broadcast(BroadcastType.MESSAGE, "game.quit.toOthers" gTranslate arrayOf(player.name, numberOfPlayers, room.maxOfPlayers), arrayOf(player.name))
+        player.sendMessage("base.game.quit.toEntrant" translate arrayOf(name))
+        this.broadcast(BroadcastType.MESSAGE, "base.game.quit.toOthers" translate arrayOf(player.name, numberOfPlayers, room.maxOfPlayers), arrayOf(player.name))
     }
 
     open fun addPlayer(player: NukkitPlayer) {
         allPlayers[player.name] = player
         numberOfPlayers++
-        player.gameInfo = arrayOf(room.type, room.id, serialNumber)
         this.checkNumberOfPlayers()
     }
 
     open fun delPlayer(player: NukkitPlayer) {
         allPlayers.remove(player.name)
-        player.gameInfo = arrayOf()
         numberOfPlayers--
         this.checkNumberOfPlayers()
     }
@@ -67,8 +69,8 @@ abstract class GameInstance(val room: GameRoom) {
 
     open fun kick(name: String, reason: String, cause: String): Boolean {
         val player = allPlayers[name] ?: return false
-        player.sendMessage("game.kick.toEntrant" gTranslate arrayOf(name, cause, reason))
-        this.broadcast(BroadcastType.MESSAGE, "game.kick.toOthers" gTranslate arrayOf(player.name, numberOfPlayers, room.maxOfPlayers), arrayOf(player.name))
+        player.sendMessage("base.game.kick.toEntrant" translate arrayOf(name, cause, reason))
+        this.broadcast(BroadcastType.MESSAGE, "base.game.kick.toOthers" translate arrayOf(player.name, numberOfPlayers, room.maxOfPlayers), arrayOf(player.name))
         this.restorePlayerOriginalState(player)
         this.delPlayer(player)
         player.teleport(room.stopLocation)
@@ -93,12 +95,12 @@ abstract class GameInstance(val room: GameRoom) {
         }
         if (this.numberOfPlayers < room.minOfPlayers && this.waitTask != null) {
             this.waitTask!!.cancel()
-            this.broadcast(BroadcastType.MESSAGE, "game.wait.countDown.stop" gTranslate arrayOf(), arrayOf(), BroadcastRange.ALL)
+            this.broadcast(BroadcastType.MESSAGE, "base.game.wait.countDown.stop" translate arrayOf(), arrayOf(), BroadcastRange.ALL)
             this.waitTask = null
             return
         }
         if (this.numberOfPlayers == room.maxOfPlayers) {
-            this.broadcast(BroadcastType.MESSAGE, "game.wait.countDown.fast" gTranslate arrayOf(room.fastWaitTime), arrayOf(), BroadcastRange.ALL)
+            this.broadcast(BroadcastType.MESSAGE, "base.game.wait.countDown.fast" translate arrayOf(room.fastWaitTime), arrayOf(), BroadcastRange.ALL)
             waitTask!!.tick = room.fastWaitTime
             return
         }
@@ -113,8 +115,6 @@ abstract class GameInstance(val room: GameRoom) {
         player.setSpawn(Server.getInstance().defaultLevel.safeSpawn)
         player.inventory.clearAll()
     }
-
-    infix fun String.gTranslate(params: Array<out Any>) = GameTipData.tipData[room.type]!!.translate(this, params)
 
     open fun broadcast(type: BroadcastType, msg: String, except: Array<String>, vararg range: BroadcastRange = arrayOf(BroadcastRange.ALL)) {
         val flag = this is CanDeathGameInstance && range.isNeedTransmit()
@@ -310,5 +310,3 @@ abstract class GameInstance(val room: GameRoom) {
         room.waitingInstance.remove(serialNumber)
     }
 }
-
-fun String.gTranslate(type: Games, vararg params: Any) = GameTipData.tipData[type]!!.translate(this, params)

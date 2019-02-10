@@ -1,6 +1,6 @@
 package cn.hhm.mc.game.base.gui.function
 
-import cn.hhm.mc.game.base.utils.NukkitPlayer
+import cn.hhm.mc.game.base.player.NukkitPlayer
 
 /**
  * FoundHi

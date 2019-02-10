@@ -1,5 +1,6 @@
 package cn.hhm.mc.game.base.utils
 
+import cn.hhm.mc.game.base.player.NukkitPlayer
 import cn.nukkit.Player
 import cn.nukkit.Server
 

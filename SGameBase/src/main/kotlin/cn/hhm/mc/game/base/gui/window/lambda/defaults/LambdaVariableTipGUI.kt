@@ -1,7 +1,7 @@
 package cn.hhm.mc.game.base.gui.window.lambda.defaults
 
 import cn.hhm.mc.game.base.gui.function.Variable
-import cn.hhm.mc.game.base.utils.NukkitPlayer
+import cn.hhm.mc.game.base.player.NukkitPlayer
 import cn.nukkit.form.element.ElementButtonImageData
 
 

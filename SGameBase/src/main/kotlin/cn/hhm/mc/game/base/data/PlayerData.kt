@@ -4,13 +4,13 @@ import cn.hhm.mc.game.base.SGameBase
 import cn.hhm.mc.game.base.SGameBase.Companion.TITLE
 import cn.hhm.mc.game.base.config.GradeConfig
 import cn.hhm.mc.game.base.config.VipConfig
-import cn.hhm.mc.game.base.utils.NukkitPlayer
-import cn.hhm.mc.game.base.utils.config.Config
+import cn.hhm.mc.game.base.player.NukkitPlayer
 import cn.nukkit.Server
+import cn.nukkit.utils.Config
 import java.io.File
 
 class PlayerData(val name: String) {
-    val data: Config = Config(File(SGameBase.instance.dataFolder.absolutePath + "/players/$name.yml"), Config.ConfigType.YAML, linkedMapOf(
+    val data: Config = Config(File(SGameBase.instance.dataFolder.absolutePath + "/players/$name.yml"), Config.YAML, linkedMapOf<String, Any>(
             "level" to 1,
             "exp" to 0,
             "usedTitle" to 0,

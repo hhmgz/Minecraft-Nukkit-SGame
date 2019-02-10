@@ -1,7 +1,7 @@
 package cn.hhm.mc.game.base.config
 
 import cn.hhm.mc.game.base.SGameBase
-import cn.hhm.mc.game.base.utils.config.Config
+import cn.nukkit.utils.Config
 import java.util.*
 
 /**
@@ -16,7 +16,7 @@ object GradeConfig {
         private set
 
     fun init() {
-        config = Config(SGameBase.instance.dataFolder.toString() + "/grades.yml", Config.ConfigType.YAML)
+        config = Config(SGameBase.instance.dataFolder.toString() + "/grades.yml", Config.YAML)
         init1()
         max = config.getInt("最大等级")
         levelUpNeed = HashMap()
@@ -28,7 +28,7 @@ object GradeConfig {
     }
 
     private fun init1() {
-        if (config.content.isEmpty()) {
+        if (config.all.isEmpty()) {
             val map = LinkedHashMap<String, Any>()
             map["最大等级"] = 100
             val levelUp = HashMap<Int, Int>()
@@ -36,7 +36,7 @@ object GradeConfig {
                 levelUp[i] = i * 100
             }
             map["升级所需"] = levelUp
-            config.content = map
+            config.setAll(map)
             config.save()
         }
     }

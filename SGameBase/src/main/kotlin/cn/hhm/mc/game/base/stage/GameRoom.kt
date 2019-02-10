@@ -1,13 +1,13 @@
 package cn.hhm.mc.game.base.stage
 
 import cn.hhm.mc.game.base.SGameBase
+import cn.hhm.mc.game.base.player.NukkitPlayer
 import cn.hhm.mc.game.base.stage.task.GamePlayingTask
 import cn.hhm.mc.game.base.stage.task.GameWaitTask
 import cn.hhm.mc.game.base.utils.Games
-import cn.hhm.mc.game.base.utils.NukkitPlayer
-import cn.hhm.mc.game.base.utils.config.Config
 import cn.nukkit.Server
 import cn.nukkit.level.Location
+import cn.nukkit.utils.Config
 
 abstract class GameRoom(val type: Games, val id: String) {
     val waitingInstance: HashMap<Long, GameInstance> = hashMapOf()

@@ -1,0 +1,19 @@
+base.game.join.toEntrant: "%TITLE成功加入游戏房间:%1" #加入游戏对加入者消息
+base.game.join.toOthers: "§7<§b%1§7> §6加入了房间! (%2/%3)" #加入游戏对其他人消息
+base.game.join.error: "%TITLE%1实例错误,请稍后再试"
+base.game.join.reachedMaximum: "%TITLE%1实例加入失败,人数达到最大值,请重新再试"
+
+base.game.quit.toEntrant: "%TITLE成功退出游戏房间:%1" #退出游戏对退出者消息
+base.game.quit.toOthers: "§7<§b%1§7> §6退出了房间! (%2/%3)" #退出游戏对其他人消息
+base.game.quit.error: "%TITLE%1实例错误,请稍后再试"
+
+base.game.kick.toEntrant: "%TITLE 你被踢出了游戏房间:%1,操作者:%2,原因:%3" #被踢出游戏对玩家消息
+base.game.kick.toOthers: "§7<§b%1§7> §6被踢出了房间! (%2/%3)" #被踢出游戏对其他人消息
+
+base.game.wait.countDown.stop: "%TITLE§l§6人数过少,停止倒计时" #倒计时停止
+base.game.wait.countDown.final: "§l§%1%1" #倒计时<10s
+base.game.wait.countDown.beginning: "%TITLE§l§6距离游戏开始还有%1秒" #倒计时>10s
+base.game.wait.countDown.fast: "%TITLE§l§6达到最大游戏人数,%1秒后开始游戏" #倒计时>10s
+
+base.game.start.go: "%TITLE§l§2游戏开始!" #游戏开始提醒
+

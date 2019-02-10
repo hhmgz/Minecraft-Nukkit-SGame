@@ -1,20 +1,22 @@
 package cn.hhm.mc.game.bedwars
 
 import cn.hhm.mc.game.base.config.ConfigStorageMode
+import cn.hhm.mc.game.base.data.GameTipData
+import cn.hhm.mc.game.base.module.EncryptedPlugin
 import cn.hhm.mc.game.base.module.GameBase
 import cn.hhm.mc.game.base.utils.GameCoreConfig
 import cn.hhm.mc.game.base.utils.Games
 import cn.nukkit.item.Item
-import java.io.File
 
-class SBedWars(file: File) : GameBase(Games("bw", "BedWars", GameCoreConfig(ConfigStorageMode.FILE), TITLE), "SBedWars", file) {
+class SBedWars : GameBase(Games("bw", "BedWars", GameCoreConfig(ConfigStorageMode.FILE), TITLE)), EncryptedPlugin {
     override fun onLoad() {
-        super.onLoad()
+        GameTipData.load(this, TITLE)
         this.info("加载完成")
     }
 
     override fun onEnable() {
         this.loadRooms()
+        this.info("启动成功")
     }
 
     override fun onDisable() {
