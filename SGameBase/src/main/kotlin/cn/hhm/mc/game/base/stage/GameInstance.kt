@@ -5,10 +5,7 @@ import cn.hhm.mc.game.base.player.NukkitPlayer
 import cn.hhm.mc.game.base.stage.instance.CanDeathGameInstance
 import cn.hhm.mc.game.base.stage.task.GamePlayingTask
 import cn.hhm.mc.game.base.stage.task.GameWaitTask
-import cn.hhm.mc.game.base.utils.BroadcastRange
-import cn.hhm.mc.game.base.utils.BroadcastType
-import cn.hhm.mc.game.base.utils.isNeedTransmit
-import cn.hhm.mc.game.base.utils.isOverlap
+import cn.hhm.mc.game.base.utils.*
 import cn.nukkit.Player
 import cn.nukkit.Server
 
@@ -51,7 +48,12 @@ abstract class GameInstance(val room: GameRoom) {
         this.checkNumberOfPlayers()
     }
 
-    abstract fun start()//游戏开始时进行的操作
+    open fun start() {
+        this.stage = StageMode.GAMING
+        this.gamingTask = room.getGamingTask(this)
+        this.gamingTask!!.repeatingStart(20)
+        this.broadcast(BroadcastType.MESSAGE, "base.game.start.go" translate arrayOf(), arrayOf())
+    }
 
     abstract fun stop()//游戏结束时的操作
 
@@ -90,7 +92,7 @@ abstract class GameInstance(val room: GameRoom) {
         if (this.numberOfPlayers == room.minOfPlayers) {
             stage = StageMode.PRE_START
             waitTask = room.getWaitTask(this)
-            Server.getInstance().scheduler.scheduleDelayedRepeatingTask(waitTask, 20, 20)
+            waitTask!!.delayedRepeatingStart(20, 20)
             return
         }
         if (this.numberOfPlayers < room.minOfPlayers && this.waitTask != null) {

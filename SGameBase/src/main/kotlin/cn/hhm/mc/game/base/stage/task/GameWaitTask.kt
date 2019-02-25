@@ -3,7 +3,6 @@ package cn.hhm.mc.game.base.stage.task
 import cn.hhm.mc.game.base.SGameBase
 import cn.hhm.mc.game.base.data.translate
 import cn.hhm.mc.game.base.stage.GameInstance
-import cn.hhm.mc.game.base.utils.BroadcastRange
 import cn.hhm.mc.game.base.utils.BroadcastType
 import cn.hhm.mc.game.base.utils.Games
 import cn.nukkit.scheduler.PluginTask
@@ -21,7 +20,6 @@ open class GameWaitTask(val instance: GameInstance) : PluginTask<SGameBase>(SGam
 
     open fun checkStart() {
         if (this.tick <= 0) {
-            instance.broadcast(BroadcastType.MESSAGE, "base.game.start.go" translate arrayOf(), arrayOf(), BroadcastRange.ALIVE)
             instance.start()
             instance.waitTask = null
             this.cancel()

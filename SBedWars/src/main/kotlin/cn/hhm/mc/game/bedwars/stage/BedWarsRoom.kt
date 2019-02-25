@@ -19,6 +19,7 @@ class BedWarsRoom(id: String) : GameRoom(SBedWars.instance.type, id) {
     var voidKill = 0
     val mineral: BedWarsMineralData = BedWarsMineralData(this)
     val teamData: HashMap<Int, BedWarsTeamData> = hashMapOf()
+    var watchingLocation = Server.getInstance().defaultLevel.safeSpawn.location
 
     override fun configure(data: MutableMap<String, Any>) {
         if (data.isEmpty()) return
@@ -30,6 +31,7 @@ class BedWarsRoom(id: String) : GameRoom(SBedWars.instance.type, id) {
         this.gamingTime = data["gamingTime"] as Int
         this.gameLevel = data["gameLevel"].toString().toLevel()
         this.stopLocation = data["stopLocation"].toString().toLocation()
+        this.watchingLocation = data["watchingLocation"].toString().toLocation()
         this.voidKill = data["voidKill"] as Int
         val mineral = data["mineral"] as MutableMap<*, *>
         val dropSpeed = mineral["speed"] as MutableMap<*, *>
@@ -60,13 +62,12 @@ class BedWarsRoom(id: String) : GameRoom(SBedWars.instance.type, id) {
                 teamMineralData.copperPosition.add(pos)
                 this.mineral.copperPosition.add(pos)
             }
-
             teamData[id] = team
         }
     }
 
-    override fun getData(): MutableMap<String, Any> {
-        val map = hashMapOf<String, Any>()
+    override fun getData(): LinkedHashMap<String, Any> {
+        val map = linkedMapOf<String, Any>()
         map["disName"] = this.disName
         map["minOfPlayers"] = this.minOfPlayers
         map["maxOfPlayers"] = this.maxOfPlayers
@@ -74,6 +75,7 @@ class BedWarsRoom(id: String) : GameRoom(SBedWars.instance.type, id) {
         map["waitLocation"] = this.waitLocation.asString()
         map["gamingTime"] = this.gamingTime
         map["gameLevel"] = this.gameLevel.name
+        map["watchingLocation"] = this.watchingLocation.asString()
         map["stopLocation"] = this.stopLocation.asString()
         map["voidKill"] = this.voidKill
         val dP = arrayListOf<String>()
@@ -110,10 +112,43 @@ class BedWarsRoom(id: String) : GameRoom(SBedWars.instance.type, id) {
         return map
     }
 
+    fun loadPosition() {
+        val data = config!!.all
+        this.gameLevel = data["gameLevel"].toString().toLevel()
+        this.waitLocation = data["waitLocation"].toString().toLocation()
+        this.stopLocation = data["stopLocation"].toString().toLocation()
+        this.watchingLocation = data["watchingLocation"].toString().toLocation()
+        val mineral = data["mineral"] as MutableMap<*, *>
+        val dropPosition = mineral["position"] as MutableMap<*, *>
+        this.mineral.diamondPosition.clear()
+        this.mineral.goldPosition.clear()
+        this.mineral.silverPosition.clear()
+        this.mineral.copperPosition.clear()
+        (dropPosition["diamond"] as ArrayList<*>).forEach { this.mineral.diamondPosition.add(it.toString().toPosition()) }
+        (dropPosition["gold"] as ArrayList<*>).forEach { this.mineral.goldPosition.add(it.toString().toPosition()) }
+        teamData.forEach { t, u ->
+            u.mineralData.silverPosition.clear()
+            u.mineralData.copperPosition.clear()
+            val tData = (data["teamData"] as MutableMap<*, *>)[t.toString()] as MutableMap<*, *>
+            (tData["silver"] as ArrayList<*>).forEach {
+                val pos = it.toString().toPosition()
+                u.mineralData.silverPosition.add(pos)
+                this.mineral.silverPosition.add(pos)
+            }
+            (tData["copper"] as ArrayList<*>).forEach {
+                val pos = it.toString().toPosition()
+                u.mineralData.copperPosition.add(pos)
+                this.mineral.copperPosition.add(pos)
+            }
+            u.spawnLocation = tData["spawnLocation"].toString().toLocation()
+            u.shopLocation = tData["shopLocation"].toString().toLocation()
+            u.coreLocation = tData["coreLocation"].toString().toLocation()
+        }
+    }
+
     override fun save() {
         this.config ?: return
-        this.config!!.clear()
-        getData().forEach { t, u -> this.config!![t] = u }
+        this.config!!.setAll(getData())
         this.config!!.save()
     }
 

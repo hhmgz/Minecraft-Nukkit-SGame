@@ -53,7 +53,7 @@ abstract class GameRoom(val type: Games, val id: String) {
 
     abstract fun save()
 
-    abstract fun getData(): MutableMap<String, Any>
+    abstract fun getData(): LinkedHashMap<String, Any>
 
     abstract fun configure(data: MutableMap<String,Any>)
 

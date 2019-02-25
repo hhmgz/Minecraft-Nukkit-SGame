@@ -57,6 +57,12 @@
     </build>
 
     <dependencies>
+        <dependency>
+            <groupId>money</groupId>
+            <artifactId>money</artifactId>
+            <version>LATEST</version>
+            <scope>provided</scope>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
         <dependency>
             <groupId>commons-io</groupId>

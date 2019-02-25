@@ -11,6 +11,8 @@ import cn.nukkit.level.Position
 import cn.nukkit.network.protocol.AddEntityPacket
 import cn.nukkit.network.protocol.RemoveEntityPacket
 import cn.nukkit.network.protocol.SetEntityDataPacket
+import cn.nukkit.plugin.PluginBase
+import cn.nukkit.scheduler.PluginTask
 import java.util.*
 
 fun String.toPosition(): Position {
@@ -47,6 +49,18 @@ fun Position.asString(): String = "${this.floorX}:${this.floorY}:${this.floorZ}:
 fun String.toLevel(): Level {
     if (!NukkitUtils.isLoadedWorld(this)) throw PositionInformationConversionException(RuntimeException("不存在此世界:$this"))
     return Server.getInstance().getLevelByName(this)
+}
+
+fun PluginTask<out PluginBase>.repeatingStart(tick: Int) {
+    cn.nukkit.Server.getInstance().scheduler.scheduleRepeatingTask(this.owner, this, tick)
+}
+
+fun PluginTask<out PluginBase>.delayedStart(tick: Int) {
+    cn.nukkit.Server.getInstance().scheduler.scheduleDelayedTask(this.owner, this, tick)
+}
+
+fun PluginTask<out PluginBase>.delayedRepeatingStart(delay: Int, repeating: Int) {
+    cn.nukkit.Server.getInstance().scheduler.scheduleDelayedRepeatingTask(this.owner, this, delay, repeating)
 }
 
 object NukkitUtils {

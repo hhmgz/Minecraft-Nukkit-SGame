@@ -18,11 +18,5 @@
             <artifactId>SGame</artifactId>
             <version>0.0.1-DEV</version>
         </dependency>
-        <dependency>
-            <groupId>money</groupId>
-            <artifactId>Money</artifactId>
-            <version>3.3</version>
-            <scope>provided</scope>
-        </dependency>
     </dependencies>
 </project>

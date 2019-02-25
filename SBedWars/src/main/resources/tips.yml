@@ -3,3 +3,5 @@ bw.game.team.choose.auto: "%TITLE你没有选择队伍,系统已自动帮你选�
 bw.game.team.choose.manual: "%TITLE成功选择队伍为%1"
 bw.game.team.choose.tooMuch: "%TITLE队伍:%1人数太多了!请选择其他队伍!"
 bw.game.team.choose.max: "%TITLE队伍:%1已满员了!请选择其他队伍!"
+
+bw.game.die.beWatching: "%TITLE你的队伍核心已经被破坏,你已经死亡,将转变为观战者!"
