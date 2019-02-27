@@ -1,6 +1,6 @@
 package cn.hhm.mc.game.base.gui.window
 
-import cn.nukkit.Player
+import cn.hhm.mc.game.base.player.NukkitPlayer
 
 /**
  * FoundHi
@@ -16,10 +16,10 @@ interface LambdaGUI {
     /**
      * 在玩家点击按钮提交表单后调用.
      * */
-    fun callClicked(player: Player, data: String)
+    fun callClicked(player: NukkitPlayer, data: String)
 
     /**
      * 在玩家关闭窗口而没有点击按钮提交表单后调用.
      * */
-    fun callClosed(player: Player)
+    fun callClosed(player: NukkitPlayer)
 }

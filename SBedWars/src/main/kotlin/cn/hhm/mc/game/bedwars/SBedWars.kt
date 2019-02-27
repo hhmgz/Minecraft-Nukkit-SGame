@@ -6,6 +6,8 @@ import cn.hhm.mc.game.base.module.EncryptedPlugin
 import cn.hhm.mc.game.base.module.GameBase
 import cn.hhm.mc.game.base.utils.GameCoreConfig
 import cn.hhm.mc.game.base.utils.Games
+import cn.hhm.mc.game.bedwars.gui.configure.BedWarsConfigureGUI
+import cn.hhm.mc.game.bedwars.gui.shop.BedWarsGUIShopBase
 import cn.nukkit.item.Item
 
 class SBedWars : GameBase(Games("bw", "BedWars", GameCoreConfig(ConfigStorageMode.FILE), TITLE)), EncryptedPlugin {
@@ -15,6 +17,8 @@ class SBedWars : GameBase(Games("bw", "BedWars", GameCoreConfig(ConfigStorageMod
     }
 
     override fun onEnable() {
+        BedWarsGUIShopBase.init()
+        BedWarsConfigureGUI.init()
         this.loadRooms()
         this.info("启动成功")
     }

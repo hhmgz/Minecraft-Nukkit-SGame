@@ -3,6 +3,7 @@ package cn.hhm.mc.game.base.gui.window.lambda
 import cn.hhm.mc.game.base.gui.element.AdvancedButton
 import cn.hhm.mc.game.base.gui.window.ButtonGUI
 import cn.hhm.mc.game.base.gui.window.LambdaGUI
+import cn.hhm.mc.game.base.player.NukkitPlayer
 import cn.nukkit.Player
 import cn.nukkit.form.element.ElementButtonImageData
 import cn.nukkit.form.window.FormWindowSimple
@@ -26,7 +27,7 @@ open class LambdaButtonGUI(id: String, title: String, content: String) : ButtonG
      * @param text 按钮内容
      * @param listener 回调方法
      * */
-    open fun addButton(buttonID: String, text: String, listener: Consumer<Player>) {
+    open fun addButton(buttonID: String, text: String, listener: Consumer<NukkitPlayer>) {
         if (gui !is FormWindowSimple) return
         val button = AdvancedButton(text, listener)
         this.gui.addButton(button)
@@ -43,7 +44,7 @@ open class LambdaButtonGUI(id: String, title: String, content: String) : ButtonG
      * @param listener 回调方法
      * @param image 按钮图片
      * */
-    open fun addButton(buttonID: String, text: String, listener: Consumer<Player>, image: ElementButtonImageData) {
+    open fun addButton(buttonID: String, text: String, listener: Consumer<NukkitPlayer>, image: ElementButtonImageData) {
         if (gui !is FormWindowSimple) return
         val button = AdvancedButton(text, listener, image)
         this.gui.addButton(button)
@@ -52,7 +53,7 @@ open class LambdaButtonGUI(id: String, title: String, content: String) : ButtonG
         this.update()
     }
 
-    override fun callClicked(player: Player, data: String) {
+    override fun callClicked(player: NukkitPlayer, data: String) {
         if (gui !is FormWindowSimple) return
         if (data == "null") return
         val id = data.toInt()
@@ -63,7 +64,7 @@ open class LambdaButtonGUI(id: String, title: String, content: String) : ButtonG
         this.buttonClickedListener?.accept(id, player)
     }
 
-    override fun callClosed(player: Player) {
+    override fun callClosed(player: NukkitPlayer) {
         if (gui !is FormWindowSimple) return
         if (closedClickedListener == null) return
         this.closedClickedListener!!.accept(player)

@@ -1,6 +1,6 @@
 package cn.hhm.mc.game.base.gui.element
 
-import cn.nukkit.Player
+import cn.hhm.mc.game.base.player.NukkitPlayer
 import cn.nukkit.form.element.ElementButton
 import cn.nukkit.form.element.ElementButtonImageData
 import java.util.function.Consumer
@@ -15,17 +15,17 @@ import java.util.function.Consumer
  */
 class AdvancedButton : ElementButton {
     @Transient
-    var onClickListener: Consumer<Player>
+    var onClickListener: Consumer<NukkitPlayer>
 
-    constructor(text: String, onClickListener: Consumer<Player>) : super(text) {
+    constructor(text: String, onClickListener: Consumer<NukkitPlayer>) : super(text) {
         this.onClickListener = onClickListener
     }
 
-    constructor(text: String, onClickListener: Consumer<Player>, imageData: ElementButtonImageData) : super(text, imageData) {
+    constructor(text: String, onClickListener: Consumer<NukkitPlayer>, imageData: ElementButtonImageData) : super(text, imageData) {
         this.onClickListener = onClickListener
     }
 
-    fun callClick(player: Player) {
+    fun callClick(player: NukkitPlayer) {
         this.onClickListener.accept(player)
     }
 }

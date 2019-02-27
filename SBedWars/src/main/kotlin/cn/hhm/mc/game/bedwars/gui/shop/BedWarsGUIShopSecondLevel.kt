@@ -1,12 +1,12 @@
-package cn.hhm.mc.game.bedwars.shop
+package cn.hhm.mc.game.bedwars.gui.shop
 
 import cn.hhm.mc.game.base.gui.window.lambda.defaults.LambdaVariableButtonGUI
 import cn.hhm.mc.game.base.player.NukkitPlayer
 import cn.hhm.mc.game.base.utils.ItemName
 import cn.hhm.mc.game.bedwars.SBedWars.Companion.TITLE
-import cn.hhm.mc.game.bedwars.shop.GUIShopBase.inLevel
-import cn.hhm.mc.game.bedwars.shop.GUIShopBase.inType
-import cn.hhm.mc.game.bedwars.shop.GUIShopBase.typeThree
+import cn.hhm.mc.game.bedwars.gui.shop.BedWarsGUIShopBase.inLevel
+import cn.hhm.mc.game.bedwars.gui.shop.BedWarsGUIShopBase.inType
+import cn.hhm.mc.game.bedwars.gui.shop.BedWarsGUIShopBase.typeThree
 import cn.nukkit.Player
 import cn.nukkit.item.Item
 import cn.nukkit.item.enchantment.Enchantment
@@ -14,8 +14,8 @@ import cn.nukkit.nbt.tag.CompoundTag
 import java.util.*
 import java.util.function.Consumer
 
-class GUIShopSecondLevel(val id: Int, data: HashMap<String, Any>) {
-    val third: HashMap<Int, GUIShopThirdLevel> = HashMap()
+class BedWarsGUIShopSecondLevel(val id: Int, data: HashMap<String, Any>) {
+    val third: HashMap<Int, BedWarsGUIShopThirdLevel> = HashMap()
     val base: LambdaVariableButtonGUI = LambdaVariableButtonGUI("bedwars_shop_second_base#$id", "$TITLE §e游戏商店", "你拥有: §6铜x%0 §f银x%1 §e金x%2 §2钻石x%3")
 
     init {
@@ -56,8 +56,8 @@ class GUIShopSecondLevel(val id: Int, data: HashMap<String, Any>) {
         }
         item.customBlockData = CompoundTag().putString("bid", key)
         info["item"] = item
-        GUIShopBase.itemInfo[key] = info
-        third[third.size] = GUIShopThirdLevel(this, third.size,
+        BedWarsGUIShopBase.itemInfo[key] = info
+        third[third.size] = BedWarsGUIShopThirdLevel(this, third.size,
                 key,
                 info["copper"] as Int,
                 info["silver"] as Int,
@@ -76,7 +76,7 @@ class GUIShopSecondLevel(val id: Int, data: HashMap<String, Any>) {
             })
         }
         base.addButton("bedwars_shop_second_button_$id#goBack", "§3返回上一级", Consumer {
-            base.goBack(it as NukkitPlayer, arrayOf(GUIShopThirdLevel.getResourceCount(it, 1), GUIShopThirdLevel.getResourceCount(it, 2), GUIShopThirdLevel.getResourceCount(it, 3), GUIShopThirdLevel.getResourceCount(it, 4)))
+            base.goBack(it as NukkitPlayer, arrayOf(BedWarsGUIShopThirdLevel.getResourceCount(it, 1), BedWarsGUIShopThirdLevel.getResourceCount(it, 2), BedWarsGUIShopThirdLevel.getResourceCount(it, 3), BedWarsGUIShopThirdLevel.getResourceCount(it, 4)))
         })
         base.closedClickedListener = Consumer {
             val name = it.name
@@ -88,6 +88,6 @@ class GUIShopSecondLevel(val id: Int, data: HashMap<String, Any>) {
 
     fun openGUI(player: Player) {
         if (player !is NukkitPlayer) return
-        player.showGUI(this.base, arrayOf(GUIShopThirdLevel.getResourceCount(player, 1), GUIShopThirdLevel.getResourceCount(player, 2), GUIShopThirdLevel.getResourceCount(player, 3), GUIShopThirdLevel.getResourceCount(player, 4)))
+        player.showGUI(this.base, arrayOf(BedWarsGUIShopThirdLevel.getResourceCount(player, 1), BedWarsGUIShopThirdLevel.getResourceCount(player, 2), BedWarsGUIShopThirdLevel.getResourceCount(player, 3), BedWarsGUIShopThirdLevel.getResourceCount(player, 4)))
     }
 }

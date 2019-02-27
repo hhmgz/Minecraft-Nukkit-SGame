@@ -20,6 +20,7 @@ class BedWarsRoom(id: String) : GameRoom(SBedWars.instance.type, id) {
     val mineral: BedWarsMineralData = BedWarsMineralData(this)
     val teamData: HashMap<Int, BedWarsTeamData> = hashMapOf()
     var watchingLocation = Server.getInstance().defaultLevel.safeSpawn.location
+    var teamCount = 0
 
     override fun configure(data: MutableMap<String, Any>) {
         if (data.isEmpty()) return

@@ -14,6 +14,9 @@
           <option name="pluginClasspaths">
             <array />
           </option>
+          <option name="errors">
+            <ArgumentParseErrors />
+          </option>
         </compilerArguments>
       </configuration>
     </facet>
@@ -29,10 +32,42 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: money:money:3.3" level="project" />
     <orderEntry type="module" module-name="SGameBase" />
     <orderEntry type="module" module-name="SGame" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: money:money:3.3" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: net.mamoe:moedb:2.2.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: redis.clients:jedis:3.0.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.slf4j:slf4j-api:1.7.22" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.commons:commons-pool2:2.4.3" level="project" />
     <orderEntry type="library" name="Maven: commons-io:commons-io:2.6" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: cn.nukkit:nukkit:1.0-SNAPSHOT" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nukkitx:fastutil-lite:8.1.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.guava:guava:21.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.code.gson:gson:2.4" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.yaml:snakeyaml:1.16" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.iq80.leveldb:leveldb:0.10-SNAPSHOT" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.iq80.leveldb:leveldb-api:0.10-SNAPSHOT" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: io.netty:netty-handler:4.1.6.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: io.netty:netty-buffer:4.1.6.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: io.netty:netty-transport:4.1.6.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: io.netty:netty-resolver:4.1.6.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: io.netty:netty-codec:4.1.6.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: io.netty:netty-transport-native-epoll:linux-x86_64:4.1.6.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: io.netty:netty-common:4.1.6.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.nimbusds:nimbus-jose-jwt:4.39.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.github.stephenc.jcip:jcip-annotations:1.0-1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: net.minidev:json-smart:2.3" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: net.minidev:accessors-smart:1.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.ow2.asm:asm:5.0.4" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.logging.log4j:log4j-api:2.11.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.logging.log4j:log4j-core:2.11.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: net.sf.jopt-simple:jopt-simple:5.0.4" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: net.minecrell:terminalconsoleappender:1.1.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.jline:jline-terminal:3.9.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.jline:jline-terminal-jna:3.9.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: net.java.dev.jna:jna:4.2.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.jline:jline-reader:3.9.0" level="project" />
     <orderEntry type="library" name="Maven: org.jetbrains.kotlin:kotlin-stdlib:1.3.21" level="project" />
     <orderEntry type="library" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-common:1.3.21" level="project" />
     <orderEntry type="library" name="Maven: org.jetbrains:annotations:13.0" level="project" />

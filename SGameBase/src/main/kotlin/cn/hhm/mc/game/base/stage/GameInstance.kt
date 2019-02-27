@@ -28,12 +28,14 @@ abstract class GameInstance(val room: GameRoom) {
         this.broadcast(BroadcastType.MESSAGE, "base.game.join.toOthers" translate arrayOf(player.name, numberOfPlayers, room.maxOfPlayers), arrayOf(player.name))
     }
 
-    open fun quit(player: NukkitPlayer) {//玩家退出进行的操作，请在玩家真的进入房间后进行super.quit(player)来进行一些可以避免重复的代码信息
+    open fun quit(player: NukkitPlayer, sendMsg: Boolean = true) {//玩家退出进行的操作，请在玩家真的进入房间后进行super.quit(player)来进行一些可以避免重复的代码信息
         this.restorePlayerOriginalState(player)
         player.teleport(room.stopLocation)
         this.delPlayer(player)
-        player.sendMessage("base.game.quit.toEntrant" translate arrayOf(name))
-        this.broadcast(BroadcastType.MESSAGE, "base.game.quit.toOthers" translate arrayOf(player.name, numberOfPlayers, room.maxOfPlayers), arrayOf(player.name))
+        if (sendMsg) {
+            player.sendMessage("base.game.quit.toEntrant" translate arrayOf(name))
+            this.broadcast(BroadcastType.MESSAGE, "base.game.quit.toOthers" translate arrayOf(player.name, numberOfPlayers, room.maxOfPlayers), arrayOf(player.name))
+        }
     }
 
     open fun addPlayer(player: NukkitPlayer) {

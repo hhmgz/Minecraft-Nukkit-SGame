@@ -12,7 +12,7 @@ import java.io.File
  * version 1.0
  */
 abstract class GameBase(val type: Games) : AbstractModule() {
-    val gameRooms: HashMap<Int, GameRoom> = hashMapOf()
+    val gameRooms: HashMap<String, GameRoom> = hashMapOf()
     var gameRoomClass: Class<out GameRoom> = GameRoom::class.java
     var gameInstanceClass: Class<out GameInstance> = GameInstance::class.java
 
@@ -20,10 +20,9 @@ abstract class GameBase(val type: Games) : AbstractModule() {
         var success = 0
         var fail = 0
         File(this.absolutePath.toString() + "/rooms/").list().forEach {
-            val r = it.replace(".yml", "").toInt()
+            val id = it.replace(".yml", "")
             try {
-                val room = gameRoomClass.getConstructor(Games::class.java, Int::class.java).newInstance(type, r)
-                gameRooms[r] = room
+                gameRooms[id] = gameRoomClass.getConstructor(Games::class.java, String::class.java).newInstance(type, id)
                 success++
             } catch (e: Throwable) {
                 fail++

@@ -1,12 +1,12 @@
-package cn.hhm.mc.game.bedwars.shop
+package cn.hhm.mc.game.bedwars.gui.shop
 
 import cn.hhm.mc.game.base.gui.window.lambda.LambdaCustomGUI
 import cn.hhm.mc.game.base.player.NukkitPlayer
 import cn.hhm.mc.game.bedwars.SBedWars
 import cn.hhm.mc.game.bedwars.SBedWars.Companion.TITLE
-import cn.hhm.mc.game.bedwars.shop.GUIShopBase.inLevel
-import cn.hhm.mc.game.bedwars.shop.GUIShopBase.inType
-import cn.hhm.mc.game.bedwars.shop.GUIShopBase.typeThree
+import cn.hhm.mc.game.bedwars.gui.shop.BedWarsGUIShopBase.inLevel
+import cn.hhm.mc.game.bedwars.gui.shop.BedWarsGUIShopBase.inType
+import cn.hhm.mc.game.bedwars.gui.shop.BedWarsGUIShopBase.typeThree
 import cn.nukkit.Player
 import cn.nukkit.item.Item
 import java.util.*
@@ -14,7 +14,7 @@ import java.util.function.BiConsumer
 import java.util.function.Consumer
 import kotlin.math.roundToInt
 
-class GUIShopThirdLevel(val secondLevel: GUIShopSecondLevel, val id: Int, val iid: String, val copper: Int, val silver: Int, val gold: Int, val diamond: Int, dn: String) {
+class BedWarsGUIShopThirdLevel(val secondLevel: BedWarsGUIShopSecondLevel, val id: Int, val iid: String, val copper: Int, val silver: Int, val gold: Int, val diamond: Int, dn: String) {
     var dn: String? = null
         private set
     val base = LambdaCustomGUI("bedwars_shop_third_${secondLevel.id}#${this.id}", "$TITLE §e游戏商店")
@@ -45,7 +45,7 @@ class GUIShopThirdLevel(val secondLevel: GUIShopSecondLevel, val id: Int, val ii
                 this.removeItem(u, Item.get(336, 0, nc))
                 this.removeItem(u, Item.get(264, 0, nd))
                 for (i in 0 until count) {
-                    u.inventory.addItem(GUIShopBase.itemInfo[iid]!!["item"] as Item)
+                    u.inventory.addItem(BedWarsGUIShopBase.itemInfo[iid]!!["item"] as Item)
                 }
                 u.sendMessage("$TITLE§3成功兑换!")
             } else {

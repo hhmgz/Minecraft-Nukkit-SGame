@@ -1,8 +1,8 @@
 package cn.hhm.mc.game.base.gui.window.lambda.defaults
 
 import cn.hhm.mc.game.base.gui.function.Variable
+import cn.hhm.mc.game.base.gui.window.lambda.LambdaModalGUI
 import cn.hhm.mc.game.base.player.NukkitPlayer
-import net.mcpes.hhm.nk.bedwars.gui.window.lambda.LambdaModalGUI
 
 /**
  * FoundHi

@@ -2,6 +2,7 @@ package cn.hhm.mc.game.base.gui.window.lambda
 
 import cn.hhm.mc.game.base.gui.window.CustomGUI
 import cn.hhm.mc.game.base.gui.window.LambdaGUI
+import cn.hhm.mc.game.base.player.NukkitPlayer
 import cn.nukkit.Player
 import cn.nukkit.form.element.*
 import cn.nukkit.form.window.FormWindowCustom
@@ -18,9 +19,9 @@ import java.util.function.Consumer
  */
 open class LambdaCustomGUI @JvmOverloads constructor(id: String, title: String, imageURL: String = "") : CustomGUI(ProcessMode.LAMBDA, id, title, imageURL), LambdaGUI {
     var submittedClickedListener: BiConsumer<HashMap<String, Any>, Player>? = null
-    var closedClickedListener: Consumer<Player>? = null
+    var closedClickedListener: Consumer<NukkitPlayer>? = null
 
-    override fun callClicked(player: Player, data: String) {
+    override fun callClicked(player: NukkitPlayer, data: String) {
         if (gui !is FormWindowCustom) return
         val map = this.getDataMap(data)
         if (map.isNotEmpty()) {
@@ -28,7 +29,7 @@ open class LambdaCustomGUI @JvmOverloads constructor(id: String, title: String, 
         }
     }
 
-    override fun callClosed(player: Player) {
+    override fun callClosed(player: NukkitPlayer) {
         if (gui !is FormWindowCustom) return
         this.closedClickedListener?.accept(player)
     }

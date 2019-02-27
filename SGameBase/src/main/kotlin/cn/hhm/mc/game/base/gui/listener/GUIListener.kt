@@ -11,7 +11,6 @@ import cn.nukkit.Server
 import cn.nukkit.event.EventHandler
 import cn.nukkit.event.EventPriority
 import cn.nukkit.event.Listener
-import cn.nukkit.event.player.PlayerQuitEvent
 import cn.nukkit.event.server.DataPacketReceiveEvent
 import cn.nukkit.network.protocol.ModalFormResponsePacket
 
@@ -27,7 +26,7 @@ class GUIListener : Listener {
     private val lastWindows: MutableMap<String, NukkitGraphicalUserInterface> = hashMapOf()
 
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
-    fun onQuit(event: PlayerQuitEvent) {
+    fun onQuit(event: NukkitPlayerQuitEvent) {
         lastWindows.remove(event.player.name)
         NukkitGraphicalUserInterface.removeInGUI(event.player.name)
     }
